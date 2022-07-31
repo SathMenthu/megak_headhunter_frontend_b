@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import {
+  AdminFilters,
   DefaultResponse,
   EditedUserData,
   FilteredUser,
@@ -18,12 +19,16 @@ export const useUserStore = defineStore('userStore', {
   }),
   getters: {},
   actions: {
-    async getAllUsersData(page: number, limit: number, filters: UserFilters) {
+    async getAllUsersData(
+      page: number,
+      limit: number,
+      filters: UserFilters | AdminFilters,
+    ) {
       const snackbarStore = useSnackbarStore();
       let snackbarMessage = '';
       let snackbarType = '';
 
-      const payload: FilterPayload<UserFilters> = {
+      const payload: FilterPayload<UserFilters | AdminFilters> = {
         page,
         limit,
         filters,

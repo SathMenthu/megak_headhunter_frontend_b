@@ -1,4 +1,4 @@
-export const translator = (text: string) => {
+export const translator = (text: string | boolean) => {
   switch (text) {
     case 'Incorrect login data.':
       return 'Niepoprawne dane logowania.';

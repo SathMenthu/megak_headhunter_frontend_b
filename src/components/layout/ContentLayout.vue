@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="mx-64 overflow-hidden">
     <slot></slot>
   </div>
 </template>

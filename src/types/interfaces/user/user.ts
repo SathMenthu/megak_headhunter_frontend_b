@@ -7,8 +7,9 @@ export interface UserBasicData {
   password: string;
   firstName: string;
   lastName: string;
-  permissions: RoleEnum;
-  avatar: string
+  permission: RoleEnum;
+  avatar: string;
+  accountBlocked: boolean;
 }
 
 export type FilteredUser = Omit<UserBasicData, 'password'>;
@@ -44,15 +45,26 @@ export interface EditedUserData {
   newPassword: string | null;
   name: string;
   surname: string;
-  permissions: RoleEnum[];
+  permission: RoleEnum;
 }
 
 export interface UserFilters extends BaseOfSort {
+  search: string | null
   email: string | null;
-  name: string | null;
-  surname: string | null;
+  firstName: string | null;
+  lastName: string | null;
   permission: {
     text: string;
     value: RoleEnum | null;
   };
+  accountBlocked: boolean | null;
+}
+
+export interface AdminFilters extends BaseOfSort {
+  search: string | null;
+  permission: {
+    text: string;
+    value: RoleEnum | null;
+  };
+  accountBlocked: boolean | null;
 }

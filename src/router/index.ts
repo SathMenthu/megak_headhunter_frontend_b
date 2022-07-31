@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import LoginView from '../views/LoginView.vue';
-import DashboardView from '../views/DashboardView.vue';
+import AdminDashboardView from '../views/AdminDashboardView.vue';
 import { useAuthStore } from '../stores/auth';
 
 const routes: Array<RouteRecordRaw> = [
@@ -9,8 +9,8 @@ const routes: Array<RouteRecordRaw> = [
     component: LoginView,
   },
   {
-    path: '/dashboard',
-    component: DashboardView,
+    path: '/admin-dashboard',
+    component: AdminDashboardView,
     meta: {
       requireAuth: true,
     },
@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
 
   {
     path: '/:pathMatch(.*)*',
-    component: DashboardView,
+    component: AdminDashboardView,
     meta: {
       requireAuth: true,
     },
@@ -36,7 +36,9 @@ router.beforeEach(async (to) => {
   if (to.meta.requireAuth) {
     await authStore.auth();
   } else {
-    to.path === '/login' && authStore.isLoggedIn && router.push('/dashboard');
+    to.path === '/login' &&
+      authStore.isLoggedIn &&
+      router.push('/admin-dashboard');
   }
 });
 
