@@ -22,6 +22,7 @@
             <input
               class="dark-bgc2 filter-input-icon-color pl-10 px-3 py-2 shadow-lg hover:border focus:outline-none focus:shadow-outline w-full"
               type="text"
+              autocomplete="new-search"
               placeholder="Szukaj"
               v-model="search"
               v-on:keyup.enter="getDataTable()"
@@ -73,22 +74,7 @@
             <td>
               <button
                 class="pointer transition relative group ml-2"
-                @click="showBlockUserDialog(user)"
-              >
-                <mdicon
-                  name="account-convert"
-                  class="relative text-lime-500 hover:text-lime-400"
-                >
-                </mdicon>
-                <div
-                  class="group-hover:visible invisible transition duration-700 hover:duration-450 ease-in-out opacity-0 group-hover:opacity-100 text-xs absolute bg-gray-700 px-2 py-1 bg-opacity-75 cursor-auto -bottom-1 z-50 right-7"
-                >
-                  <span> Zmień Podstawowe Dane</span>
-                </div>
-              </button>
-              <button
-                class="pointer transition relative group ml-2"
-                @click="showBlockUserDialog(user)"
+                @click="showChangePasswordForTargetUserModal(user)"
               >
                 <mdicon
                   name="lock-reset"
@@ -96,14 +82,14 @@
                 >
                 </mdicon>
                 <div
-                  class="group-hover:visible invisible transition duration-700 hover:duration-450 ease-in-out opacity-0 group-hover:opacity-100 text-xs absolute bg-gray-700 px-2 py-1 bg-opacity-75 cursor-auto -top-11 z-50"
+                  class="group-hover:visible invisible transition duration-700 hover:duration-450 ease-in-out opacity-0 group-hover:opacity-100 text-xs absolute bg-gray-700 px-2 py-1 bg-opacity-75 cursor-auto right-7 -bottom-2 z-50"
                 >
                   Zmień Hasło
                 </div>
               </button>
               <button
                 class="pointer transition relative group ml-2"
-                @click="showBlockUserDialog(user)"
+                @click="showBlockTargetUserModal(user)"
               >
                 <mdicon
                   name="account-cancel-outline"
@@ -159,6 +145,21 @@
         <mdicon name="chevron-right"></mdicon>
       </button>
     </div>
+    <BlockTargetUserModal
+      :user="targerUser"
+      v-if="blockTargetUserModal"
+      @closeBlockDialog="blockTargetUserModal = false"
+      @blockUserAndCloseDialog="(user: FilteredUser) => {
+        blockTargerUser(user)
+      }"
+    />
+    <ChangePasswordForTargetUserModal
+      @changeUserPasswordAndCloseDialog="(user: FilteredUser, password: string) => {
+        changePasswordForTargetUser(user, password)}"
+      @closeChangeUserPasswordDialog="changePasswordForTargerUserModal = false"
+      :user="targerUser"
+      v-if="changePasswordForTargerUserModal"
+    />
     <AdminFilterModal
       :filters="filters"
       :roles="roles"
@@ -183,6 +184,8 @@ import { useUserStore } from '../stores/user';
 import { useGlobalStore } from '../stores/global';
 import { AdminFilters, FilteredUser, RoleEnum, UserFilters } from '../types';
 import AdminFilterModal from '../components/filters/AdminFilterModal.vue';
+import BlockTargetUserModal from '../components/modals/user/BlockTargetUserModal.vue';
+import ChangePasswordForTargetUserModal from '../components/modals/user/ChangePasswordForTargetUserModal.vue';
 
 const userStore = useUserStore();
 const globalStore = useGlobalStore();
@@ -198,6 +201,8 @@ let currentPage = ref(1);
 const total = ref(0);
 const limit = ref(10);
 const adminFiltersModal = ref(false);
+const blockTargetUserModal = ref(false);
+const changePasswordForTargerUserModal = ref(false);
 const roles = reactive([
   { text: 'Wszystkie', value: null },
   { text: 'Student', value: RoleEnum.STUDENT },
@@ -216,7 +221,7 @@ let filters = reactive<AdminFilters>({
   sortTarget: 'accountBlocked',
 });
 
-const targerUser = ref({});
+let targerUser = ref({});
 
 getDataTable();
 
@@ -250,8 +255,33 @@ watch(search, () => {
   filters.search = search.value;
 });
 
-function showBlockUserDialog(user: FilteredUser) {
-  console.log(user);
+function showBlockTargetUserModal(user: FilteredUser) {
+  targerUser.value = user;
+
+  blockTargetUserModal.value = true;
+}
+function showChangePasswordForTargetUserModal(user: FilteredUser) {
+  targerUser.value = user;
+  changePasswordForTargerUserModal.value = true;
+}
+
+async function blockTargerUser(user: FilteredUser) {
+  await userStore.blockTargetUser(user.id);
+  await getDataTable();
+  blockTargetUserModal.value = false;
+}
+
+async function changePasswordForTargetUser(
+  user: FilteredUser,
+  password: string,
+) {
+  
+  const payload = {
+    password,
+  };
+  await userStore.changePasswordForTargetUser(user.id, payload);
+  await getDataTable();
+  changePasswordForTargerUserModal.value = false;
 }
 </script>
 

@@ -123,5 +123,55 @@ export const useUserStore = defineStore('userStore', {
         snackbarStore.type = snackbarType;
       }
     },
+    async blockTargetUser(id: string) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+      try {
+        const {
+          data: { isSuccess },
+        }: { data: FindUserResponse } = await axios.patch(
+          `api/user/block/${id}`,
+        );
+
+        if (isSuccess) {
+          snackbarMessage = 'Pomyślnie zablokowano użytkownika.';
+          snackbarType = 'success';
+        }
+      } catch (error) {
+        snackbarMessage = 'Wystąpił błąd podczas blokowania użytkownika.';
+        snackbarType = 'error';
+      } finally {
+        snackbarStore.message = snackbarMessage;
+        snackbarStore.type = snackbarType;
+      }
+    },
+    async changePasswordForTargetUser(
+      id: string,
+      payload: { password: string },
+    ) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+      try {
+        const {
+          data: { isSuccess },
+        }: { data: FindUserResponse } = await axios.patch(
+          `api/user/password/${id}`,
+          payload,
+        );
+
+        if (isSuccess) {
+          snackbarMessage = 'Pomyślnie zmieniono hasło użytkownika.';
+          snackbarType = 'success';
+        }
+      } catch (error) {
+        snackbarMessage = 'Wystąpił błąd podczas zmiany hasła użytkownika.';
+        snackbarType = 'error';
+      } finally {
+        snackbarStore.message = snackbarMessage;
+        snackbarStore.type = snackbarType;
+      }
+    },
   },
 });

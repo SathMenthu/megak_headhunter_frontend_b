@@ -43,6 +43,13 @@ html {
   background-color: #0a0a0a;
 }
 
+.filter-container-center {
+  top: 0;
+  left: 0;
+  transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+  background-color: #0a0a0a;
+}
+
 .btn-clear {
   background-color: #172a35;
   padding: 3px 10px;
