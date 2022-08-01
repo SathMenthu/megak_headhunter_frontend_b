@@ -5,13 +5,27 @@
         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
           <mdicon class="filter-input-icon-color" name="magnify" />
         </span>
+        <button
+          v-if="search.length > 0"
+          class="absolute inset-y-0 right-1 flex items-center pl-2"
+          @click="
+            search = '';
+            getDataTable();
+          "
+        >
+          <mdicon
+            class="filter-input-icon-color hover:text-gray-300"
+            name="close"
+          />
+        </button>
         <div>
           <input
-            class="dark-bgc2 filter-input-icon-color pl-10 px-3 py-2 shadow-lg hover:border focus:outline-none focus:shadow-outline w-full"
+            class="dark-bgc2 filter-input-icon-color pl-10 px-3 py-2 shadow-lg focus:outline-none focus:shadow-outline w-full"
             type="text"
             autocomplete="new-search"
             placeholder="Szukaj"
             v-model="search"
+            @input="debounceDataFromTable()"
             v-on:keyup.enter="getDataTable()"
           />
         </div>
@@ -53,7 +67,7 @@
             {{ user.lastName }}
           </td>
           <td class="td-row flex">
-            <SingleChipVue :text="user.permission" />
+            {{ user.permission }}
           </td>
           <td class="td-row uppercase font-bold">
             {{ user.accountBlocked === true ? 'Nie' : 'Tak' }}
@@ -164,7 +178,6 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue';
-import SingleChipVue from '../../components/chip/SingleChip.vue';
 import AdminFilterModal from '../../components/filters/AdminFilterModal.vue';
 import BlockTargetUserModal from '../../components/modals/user/BlockTargetUserModal.vue';
 import ChangePasswordForTargetUserModal from '../../components/modals/user/ChangePasswordForTargetUserModal.vue';
@@ -272,6 +285,17 @@ async function changePasswordForTargetUser(
   await getDataTable();
   changePasswordForTargerUserModal.value = false;
 }
+
+const debounceDataFromTable = () => {
+  const timeoutId = window.setTimeout(() => {}, 0);
+  for (let id = timeoutId; id >= 0; id -= 1) {
+    window.clearTimeout(id);
+  }
+
+  setTimeout(() => {
+    getDataTable();
+  }, 500);
+};
 </script>
 
 <style>
