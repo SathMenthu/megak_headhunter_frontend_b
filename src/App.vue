@@ -39,7 +39,7 @@ html {
 .filter-container {
   top: 0;
   left: 0;
-  transform: translate(calc(50vw - 50%), calc(35vh - 50%));
+  transform: translate(calc(50vw - 50%), calc(40vh - 50%));
   background-color: #0a0a0a;
 }
 
@@ -62,5 +62,9 @@ html {
 .filter-bg {
   background-color: #1e1e1f;
   opacity: 80%;
+}
+
+.active-tab {
+  border-bottom: rgb(201, 27, 27) 2px solid;
 }
 </style>

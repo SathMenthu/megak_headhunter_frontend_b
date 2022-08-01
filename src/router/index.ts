@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import LoginView from '../views/LoginView.vue';
-import AdminDashboardView from '../views/AdminDashboardView.vue';
+import AdminDashboardView from '../views/admin/AdminDashboardView.vue';
 import { useAuthStore } from '../stores/auth';
 
 const routes: Array<RouteRecordRaw> = [
