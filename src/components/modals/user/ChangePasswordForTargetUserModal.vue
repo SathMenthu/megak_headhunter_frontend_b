@@ -1,7 +1,7 @@
 <template>
   <div class="fixed inset-0 filter-bg transition-opacity"></div>
-  <div class="fixed filter-container-center">
-    <div class="shadow-lg flex flex-col text-sm">
+  <div class="fixed dark-bgc filter-container-center-wc">
+    <div class="flex flex-col text-sm">
       <div class="flex items-center justify-center p-4">
         <h5 class="text-xl">Edycja Hasła Użytkownika</h5>
       </div>
@@ -13,7 +13,7 @@
               autocomplete="new-password"
               type="password"
               v-model="password"
-              class="text-gray-800 w-64 p-2 mt-3 mr-6"
+              class="dark-bgc2 w-64 p-2 mt-3 mr-6"
               placeholder="Hasło"
             />
             <span v-if="v$.password.$error" class="ml-5 valid mt-2">{{
@@ -22,7 +22,7 @@
           </div>
         </label>
 
-        <label class="text-white flex items-baseline justify-between ml-2">
+        <label class="flex items-baseline justify-between ml-2">
           <span class="mr-5">Potwierdź hasło:</span>
           <div class="flex flex-col items-end">
             <input
@@ -30,7 +30,7 @@
               type="password"
               placeholder="Potwierdź Hasło"
               v-model="confirmPassword"
-              class="text-gray-800 w-64 p-2 mt-3 mr-4"
+              class="dark-bgc2 w-64 p-2 mt-3 mr-4"
             />
             <span v-if="v$.confirmPassword.$error" class="valid mt-2">{{
               v$.confirmPassword.$errors[0].$message
@@ -39,17 +39,13 @@
         </label>
       </div>
 
-      <div class="flex justify-between p-4">
-        <button
-          type="button"
-          class="px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg transition duration-150 ease-in-out w-40"
-          @click="submitForm()"
-        >
+      <div class="flex w-full justify-end p-4">
+        <button type="button" class="add-button mr-5" @click="submitForm()">
           Potwierdź
         </button>
         <button
           type="button"
-          class="px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg transition duration-150 ease-in-out w-40"
+          class="p-1"
           data-bs-dismiss="modal"
           @click="$emit('closeChangeUserPasswordDialog')"
         >
@@ -98,3 +94,10 @@ async function submitForm() {
   }
 }
 </script>
+
+<style>
+.add-button {
+  background-color: #e02735;
+  padding: 5px;
+}
+</style>

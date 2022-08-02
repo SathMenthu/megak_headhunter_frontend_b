@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AuthLoginData, FilteredUser, FindUserResponse } from '../types';
 import { useSnackbarStore } from './snackbar';
 import router from '../router';
+import { userRedirect } from '../helpers/UserRedirect';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -33,7 +34,7 @@ export const useAuthStore = defineStore('auth', {
           this.user = user ? user : null;
           this.isLogged = true;
           snackbarType = 'success';
-          router.push('/dashboard');
+          router.push(userRedirect(user?.permission));
         } else {
           snackbarType = 'error';
         }

@@ -67,4 +67,18 @@ html {
 .active-tab {
   border-bottom: rgb(201, 27, 27) 2px solid;
 }
+
+.filter-container-center-wc {
+  top: 0;
+  left: 0;
+  transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+}
+
+.add-button {
+  background-color: #e02735;
+  padding: 5px;
+}
+.add-button:hover {
+  background-color: #e4404e;
+}
 </style>

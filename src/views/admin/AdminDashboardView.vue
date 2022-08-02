@@ -19,8 +19,8 @@
         </button>
 
         <button
-          @click="selectOneTab('addUserTab')"
-          :class="{ 'active-tab': addUserTab }"
+          @click="selectOneTab('addStudentTab')"
+          :class="{ 'active-tab': addStudentTab }"
           class="p-5"
         >
           Dodaj Kursanta
@@ -28,34 +28,38 @@
       </div>
     </div>
     <UserListViewVue v-if="userListTab" />
+    <AddHRView v-if="addHrTab" :role="'HR'" />
+    <AddStudentView v-if="addStudentTab" :role="'STUDENT'" />
   </ContentLayout>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import ContentLayout from '../../components/layout/ContentLayout.vue';
+import AddHRView from './AddHRView.vue';
+import AddStudentView from './AddStudentView.vue';
 import UserListViewVue from './UserListView.vue';
 
 const userListTab = ref(true);
 const addHrTab = ref(false);
-const addUserTab = ref(false);
+const addStudentTab = ref(false);
 
 function selectOneTab(tabName: string) {
   switch (tabName) {
     case 'userListTab':
       addHrTab.value = false;
-      addUserTab.value = false;
+      addStudentTab.value = false;
       userListTab.value = true;
       break;
     case 'addHrTab':
-      addUserTab.value = false;
+      addStudentTab.value = false;
       userListTab.value = false;
       addHrTab.value = true;
       break;
-    case 'addUserTab':
+    case 'addStudentTab':
       userListTab.value = false;
       addHrTab.value = false;
-      addUserTab.value = true;
+      addStudentTab.value = true;
       break;
   }
 }

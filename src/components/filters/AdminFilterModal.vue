@@ -83,8 +83,8 @@ const sortDirectionOptions = reactive([
 const sortTargets = reactive([
   { text: 'Aktywne Konto', value: 'accountBlocked' },
   { text: 'Email', value: 'email' },
-  { text: 'Imię', value: 'name' },
-  { text: 'Nazwisko', value: 'surname' },
+  { text: 'Imię', value: 'firstName' },
+  { text: 'Nazwisko', value: 'lastName' },
 ]);
 
 function resetFilter() {

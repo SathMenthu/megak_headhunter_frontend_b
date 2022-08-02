@@ -20,7 +20,7 @@
         </button>
         <div>
           <input
-            class="dark-bgc2 filter-input-icon-color pl-10 px-3 py-2 shadow-lg focus:outline-none focus:shadow-outline w-full"
+            class="dark-bgc2 filter-input-icon-color pl-10 px-3 py-2 focus:outline-none focus:shadow-outline w-full"
             type="text"
             autocomplete="new-search"
             placeholder="Szukaj"
@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="flex mt-4 dark-bgc">
-    <table class="m-3 w-full table-auto text-sm text-left shadow-2xl">
+    <table class="m-3 w-full table-auto text-sm text-left">
       <thead class="text-xs dark-bgc2">
         <tr>
           <th class="py-3 px-3" v-for="header in headers">
@@ -53,10 +53,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          class="shadow-l table-down-border"
-          v-for="user in userStore.userList"
-        >
+        <tr class="table-down-border" v-for="user in userStore.userList">
           <td class="td-row">
             {{ user.email }}
           </td>
@@ -299,14 +296,6 @@ const debounceDataFromTable = () => {
 </script>
 
 <style>
-.add-button {
-  background-color: #e02735;
-  padding: 5px;
-}
-.add-button:hover {
-  background-color: #e4404e;
-}
-
 .filter-button {
   background-color: #1e1e1f;
   padding: 7px 3px;

@@ -12,6 +12,15 @@ export interface UserBasicData {
   accountBlocked: boolean;
 }
 
+export interface ManuallyCreatedUser {
+  email: string;
+  firstName: string;
+  lastName: string;
+  permission: RoleEnum;
+  maxReservedStudents: number | null;
+  company: string | null;
+}
+
 export type FilteredUser = Omit<UserBasicData, 'password'>;
 
 export interface FindUserResponse extends DefaultResponse {
@@ -36,20 +45,28 @@ export interface ImportedStudentData {
 export interface MinimalInformationToCreateEmail {
   id: string;
   email: string;
-  activationLink: string;
+  activationLink?: string;
+  resetPasswordLink?: string;
+}
+
+export interface UrlAndEmailToSend {
+  url: string;
+  email: string;
 }
 
 export interface EditedUserData {
   id: string;
   email: string;
   newPassword: string | null;
-  name: string;
-  surname: string;
+  firstName: string;
+  lastName: string;
   permission: RoleEnum;
+  avatar: string;
+  accountBlocked: boolean;
 }
 
 export interface UserFilters extends BaseOfSort {
-  search: string | null
+  search: string | null;
   email: string | null;
   firstName: string | null;
   lastName: string | null;

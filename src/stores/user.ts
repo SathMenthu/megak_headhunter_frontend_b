@@ -8,6 +8,7 @@ import {
   FilterPayload,
   FindUserResponse,
   FindUsersResponse,
+  ManuallyCreatedUser,
   UserBasicData,
   UserFilters,
 } from '../types';
@@ -101,7 +102,7 @@ export const useUserStore = defineStore('userStore', {
         snackbarStore.type = snackbarType;
       }
     },
-    async createUser(user: Omit<UserBasicData, 'id'>) {
+    async createUser(user: ManuallyCreatedUser) {
       const snackbarStore = useSnackbarStore();
       let snackbarMessage = '';
       let snackbarType = '';
@@ -114,9 +115,39 @@ export const useUserStore = defineStore('userStore', {
         if (isSuccess) {
           snackbarMessage = 'Pomyślnie dodano użytkownika.';
           snackbarType = 'success';
+        } else {
+          snackbarMessage = 'Adres Email jest zajęty!';
+          snackbarType = 'error';
         }
+        return isSuccess;
       } catch (error) {
         snackbarMessage = 'Wystąpił błąd podczas dodawania użytkownika.';
+        snackbarType = 'error';
+      } finally {
+        snackbarStore.message = snackbarMessage;
+        snackbarStore.type = snackbarType;
+      }
+    },
+    async importUsersFromCSV(file: FormData) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+
+      try {
+        const {
+          data: { isSuccess },
+        }: { data: FindUserResponse } = await axios.post(
+          `api/user/add-many-students`,
+          file,
+        );
+
+        if (isSuccess) {
+          snackbarMessage = 'Pomyślnie zaimportowano użytkowników';
+          snackbarType = 'success';
+        }
+        return isSuccess;
+      } catch (error) {
+        snackbarMessage = 'Wystąpił błąd podczas importowania użytkowników';
         snackbarType = 'error';
       } finally {
         snackbarStore.message = snackbarMessage;
