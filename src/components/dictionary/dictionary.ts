@@ -10,7 +10,6 @@ export const translator = (text: string | boolean) => {
       return 'Wiadomość została wysłana, sprawdź swojego maila';
     case 'Account is not activated.':
       return 'Konto nie jest aktywowane.';
-
     default:
       return text;
   }

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import {
   AdminFilters,
+  CheckRegisterDto,
   DefaultResponse,
   EditedUserData,
   FilteredUser,
@@ -9,10 +10,10 @@ import {
   FindUserResponse,
   FindUsersResponse,
   ManuallyCreatedUser,
-  UserBasicData,
   UserFilters,
 } from '../types';
 import { useSnackbarStore } from './snackbar';
+import router from '../router';
 
 export const useUserStore = defineStore('userStore', {
   state: () => ({
@@ -198,6 +199,49 @@ export const useUserStore = defineStore('userStore', {
         }
       } catch (error) {
         snackbarMessage = 'Wystąpił błąd podczas zmiany hasła użytkownika.';
+        snackbarType = 'error';
+      } finally {
+        snackbarStore.message = snackbarMessage;
+        snackbarStore.type = snackbarType;
+      }
+    },
+    async checkRegisterLink(
+      payload: CheckRegisterDto,
+    ): Promise<FilteredUser | void> {
+      try {
+        const {
+          data: { isSuccess, user },
+        }: { data: FindUserResponse } = await axios.post(
+          `api/user/check-register-link/`,
+          payload,
+        );
+        if (isSuccess && user) {
+          return user;
+        }
+        throw new Error();
+      } catch (error) {
+        router.push('/login');
+      }
+    },
+    async confirmRegister(user: FilteredUser) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+      try {
+        const {
+          data: { isSuccess },
+        }: { data: FindUserResponse } = await axios.patch(
+          `api/user/confirm-register/${user.activationLink}`,
+          user,
+        );
+
+        if (isSuccess) {
+          snackbarMessage = 'Pomyślnie potwierdzono rejestracje konta.';
+          snackbarType = 'success';
+          router.push('login');
+        } else throw new Error();
+      } catch (error) {
+        snackbarMessage = 'Wystąpił błąd podczas procesu potwierdzania konta';
         snackbarType = 'error';
       } finally {
         snackbarStore.message = snackbarMessage;

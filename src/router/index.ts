@@ -5,9 +5,9 @@ import HrDashboardView from '../views/hr/HrDashboardView.vue';
 import StudentDashboardView from '../views/student/StudentDashboardView.vue';
 import NoPageFound from '../views/NoPageFound.vue';
 import Logout from '../views/Logout.vue';
+import ConfirmRegister from '../views/ConfirmRegister.vue';
 import { userRedirect } from '../helpers/UserRedirect';
 import { useAuthStore } from '../stores/auth';
-import { nextTick } from 'vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,8 +17,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/logout',
     component: Logout,
+  },
+  {
+    path: '/confirm-registration/:id?',
+    component: ConfirmRegister,
     meta: {
-      requireAuth: true,
+      requireAuth: false,
     },
   },
   {
@@ -65,7 +69,10 @@ router.beforeEach(async (to) => {
   if (to.meta.requireAuth) {
     await authStore.auth();
   } else {
-    if (to.path === '/login' && authStore.isLoggedIn) {
+    if (
+      (to.path === '/login' && authStore.isLoggedIn) ||
+      (to.path === '/confirm-registration' && authStore.isLoggedIn)
+    ) {
       router.push(userRedirect(authStore.user?.permission));
     }
   }

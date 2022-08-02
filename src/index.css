@@ -41,4 +41,8 @@
   .flex-center {
     @apply flex flex-col justify-start items-center;
   }
+
+  .flex-form {
+    @apply flex flex-col justify-between items-start p-3 gap-1;
+  }
 }
