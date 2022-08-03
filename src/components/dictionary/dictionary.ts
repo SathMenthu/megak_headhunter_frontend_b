@@ -1,4 +1,4 @@
-export const translator = (text: string | boolean) => {
+export const translator = (text: string | boolean | null) => {
   switch (text) {
     case 'Incorrect login data.':
       return 'Niepoprawne dane logowania.';
@@ -16,6 +16,25 @@ export const translator = (text: string | boolean) => {
       return 'Zatrudniony';
     case 'BUSY':
       return 'W trakcie rozmowy';
+    case 'AT LOCATION':
+      return 'Na miejscu';
+    case 'ONLY REMOTELY':
+      return 'Wyłącznie zdalnie';
+    case 'WILLINGNESS TO RELOCATE':
+      return 'Gotowość do przeprowadzki';
+    case 'HYBRID':
+      return 'Hybrydowo';
+    case 'IRRELEVANT':
+      return 'Bez znaczenia';
+    case 'ONLY EMPLOYMENT CONTRACT':
+      return 'Tylko UoP';
+    case 'POSSIBLE B2B':
+      return 'Możliwe B2B';
+    case 'POSSIBLE MANDATE CONTRACT/CONTRACT WORK':
+      return 'Możliwe UZ/UoD';
+    case 'NO PREFERENCES':
+      return 'Brak preferencji';
+
     default:
       return text;
   }

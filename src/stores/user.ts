@@ -8,17 +8,23 @@ import {
   EditedUserData,
   FilteredUser,
   FilterPayload,
+  FilterPayloadForHr,
   FindUserResponse,
   FindUsersResponse,
+  HrFilters,
   ManuallyCreatedUser,
   UserFilters,
 } from '../types';
 import { useSnackbarStore } from './snackbar';
 import router from '../router';
+import { StudentStatus } from '../types/enums/student.status.enum';
+import { useAuthStore } from './auth';
 
 export const useUserStore = defineStore('userStore', {
   state: () => ({
     userList: [] as FilteredUser[],
+    userForHR: [] as FilteredUser[],
+    userForTargetHR: [] as FilteredUser[],
   }),
   getters: {},
   actions: {
@@ -292,6 +298,113 @@ export const useUserStore = defineStore('userStore', {
       } catch (error) {
         snackbarMessage = 'Wystąpił błąd podczas aktualizacji konta konta.';
         snackbarType = 'error';
+      } finally {
+        snackbarStore.message = snackbarMessage;
+        snackbarStore.type = snackbarType;
+      }
+    },
+
+    async getAllUsersForHr(
+      page: number,
+      limit: number,
+      filters: HrFilters,
+      studentStatus: StudentStatus,
+    ) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+
+      const payload: FilterPayloadForHr<HrFilters> = {
+        page,
+        limit,
+        filters,
+        studentStatus,
+      };
+
+      try {
+        const {
+          data: { users, isSuccess, total },
+        }: { data: FindUsersResponse } = await axios.post(
+          'api/user/users-for-hr',
+          payload,
+        );
+        if (isSuccess) {
+          if (users) this.userForHR = users;
+          return total;
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          snackbarMessage =
+            'Wystąpił błąd podczas pobierania listy użytkowników.';
+          snackbarType = 'error';
+          snackbarStore.message = snackbarMessage;
+          snackbarStore.type = snackbarType;
+        }
+      }
+    },
+    async getAllUsersForTargetHr(
+      page: number,
+      limit: number,
+      filters: HrFilters,
+      studentStatus: StudentStatus,
+    ) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+      const authStore = useAuthStore();
+
+      const payload: FilterPayloadForHr<HrFilters> = {
+        page,
+        limit,
+        filters,
+        studentStatus,
+      };
+
+      try {
+        const {
+          data: { users, isSuccess, total },
+        }: { data: FindUsersResponse } = await axios.post(
+          `api/user/users-for-hr/${authStore.user?.id}`,
+          payload,
+        );
+        if (isSuccess) {
+          if (users) this.userForTargetHR = users;
+          return total;
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          snackbarMessage =
+            'Wystąpił błąd podczas pobierania listy użytkowników.';
+          snackbarType = 'error';
+          snackbarStore.message = snackbarMessage;
+          snackbarStore.type = snackbarType;
+        }
+      }
+    },
+
+    async reserveTargetUser(id: string) {
+      const authStore = useAuthStore();
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+
+      try {
+        const {
+          data: { isSuccess },
+        }: { data: DefaultResponse } = await axios.post(
+          `api/user/reserve-user/${id}`,
+          authStore.user,
+        );
+        if (isSuccess) {
+          snackbarMessage = 'Udało się zarezerwować kursanta';
+          snackbarType = 'success';
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          snackbarMessage =
+            'Wystąpił błąd podczas pobierania listy użytkowników.';
+          snackbarType = 'error';
+        }
       } finally {
         snackbarStore.message = snackbarMessage;
         snackbarStore.type = snackbarType;
