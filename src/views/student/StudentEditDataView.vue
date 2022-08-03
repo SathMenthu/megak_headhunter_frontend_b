@@ -1,0 +1,421 @@
+<template>
+  <div class="dark-bgc">
+    <div class="dark-bgc p-2 grid mt-2">
+      <span class="font-bold text-4xl mb-10 p-5">{{
+        type === 'Rejestracja' ? 'Rejestracja' : 'Twoje Dane'
+      }}</span>
+      <form class="grid grid-cols-5 justify-items-center">
+        <div>
+          <span class="p-3 uppercase underline font-bold">Dane Podstawowe</span>
+          <div class="flex-form">
+            <label for="email"> Email </label>
+            <input
+              disabled
+              id="email"
+              class="px-1 py-1"
+              v-model="editedUser.email"
+              placeholder="Email"
+              type="email"
+            />
+            <span v-if="v$.email.$error" class="valid">{{
+              v$.email.$errors[0].$message
+            }}</span>
+          </div>
+          <div class="flex-form" v-if="type === 'register'">
+            <label for="password"> Hasło </label>
+            <input
+              id="password"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.password"
+              placeholder="Hasło"
+              type="password"
+            />
+            <span v-if="v$.password.$error" class="ml-5 valid mt-2">{{
+              v$.password.$errors[0].$message
+            }}</span>
+          </div>
+          <div class="flex-form" v-if="type === 'register'">
+            <label for="confirmPassword" class="">Potwierdź Hasło </label>
+            <input
+              id="confirmPassword"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.confirmPassword"
+              placeholder="Potwierdź Hasło"
+              type="confirmPassword"
+            />
+            <span v-if="v$.confirmPassword.$error" class="valid mt-2">{{
+              v$.confirmPassword.$errors[0].$message
+            }}</span>
+          </div>
+          <div class="flex-form">
+            <label for="name"> Imię </label>
+            <input
+              id="firstName"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.firstName"
+              placeholder="Imię"
+              type="text"
+            />
+            <span v-if="v$.firstName.$error" class="valid">{{
+              v$.firstName.$errors[0].$message
+            }}</span>
+          </div>
+          <div class="flex-form">
+            <label for="lastName"> Nazwisko </label>
+            <input
+              id="lastName"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.lastName"
+              placeholder="Nazwisko"
+              type="text"
+            />
+            <span v-if="v$.lastName.$error" class="valid">{{
+              v$.lastName.$errors[0].$message
+            }}</span>
+          </div>
+          <div class="flex-form">
+            <label for="phoneNumber"> Numer Telefonu </label>
+            <input
+              id="phoneNumber"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.phoneNumber"
+              placeholder="Numer Telefonu"
+              type="tel"
+            />
+          </div>
+        </div>
+        <div>
+          <span class="p-3 uppercase underline font-bold"
+            >Dane Dotyczące Zatrudnienia</span
+          >
+          <div class="flex-form">
+            <label for="targetWorkCity"> Preferowane Miasto </label>
+            <input
+              id="targetWorkCity"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.targetWorkCity"
+              placeholder="Miasto"
+              type="text"
+            />
+          </div>
+          <div class="flex-form">
+            <label for="expectedTypeWork"> Preferowany tryb pracy </label>
+            <select v-model="editedUser.expectedTypeWork" class="dark-bgc2 p-1">
+              <option :value="option.value" v-for="option in ExpectedTypeWork">
+                {{ option.text }}
+              </option>
+            </select>
+          </div>
+          <div class="flex-form">
+            <label for="expectedContractType"> Preferowany rodzaj umowy </label>
+            <select
+              v-model="editedUser.expectedContractType"
+              class="dark-bgc2 p-1"
+            >
+              <option
+                :value="option.value"
+                v-for="option in ExpectedContractType"
+              >
+                {{ option.text }}
+              </option>
+            </select>
+          </div>
+          <div class="flex-form">
+            <label for="expectedSalary"> Wynagrodzenie </label>
+            <input
+              id="expectedSalary"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.expectedSalary"
+              placeholder="Kwota Netto"
+              type="number"
+            />
+          </div>
+          <div class="flex-form">
+            <label for="monthsOfCommercialExp">
+              Ilość miesięcy doświadczenia komercyjnego
+            </label>
+            <input
+              id="monthsOfCommercialExp"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.monthsOfCommercialExp"
+              placeholder="Ilość Miesięcy"
+              type="number"
+            />
+          </div>
+          <div class="flex-form">
+            <label for="canTakeApprenticeship">
+              Zgodę na odbycie bezpłatnego stażu ?
+            </label>
+            <select
+              v-model="editedUser.canTakeApprenticeship"
+              class="dark-bgc2 p-1"
+            >
+              <option :value="option.value" v-for="option in confirm">
+                {{ option.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <span class="p-3 uppercase underline font-bold">INFORMACJE</span>
+          <div class="flex-form">
+            <label for="bio"> Bio </label>
+            <textarea
+              id="bio"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.bio"
+              placeholder="Bio"
+            ></textarea>
+          </div>
+          <div class="flex-form">
+            <label for="education"> Wykształcenie </label>
+            <textarea
+              id="education"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.education"
+              placeholder="Wykształcenie"
+            ></textarea>
+          </div>
+          <div class="flex-form">
+            <label for="workExperience"> Doświadczenie Zawodowe </label>
+            <textarea
+              id="workExperience"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.workExperience"
+              placeholder="Doświadczenie Zawodowe"
+            ></textarea>
+          </div>
+          <div class="flex-form">
+            <label for="courses">
+              Kursy i certyfikaty związane z programowaniem
+            </label>
+            <textarea
+              id="courses"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.courses"
+              placeholder="Kursy i certyfikaty"
+            ></textarea>
+          </div>
+        </div>
+        <div>
+          <span class="p-3 uppercase underline font-bold">Oceny</span>
+          <div class="flex-form">
+            <label for="courseCompletion">
+              Ocena stopnia przejścia kursu
+            </label>
+            <input
+              disabled
+              id="courseCompletion"
+              class="px-1 py-1"
+              v-model="editedUser.courseCompletion"
+              placeholder="Ocena w zakresie 0 - 5."
+              type="number"
+            />
+          </div>
+          <div class="flex-form">
+            <label for="courseEngagement">
+              Ocena stopnia aktywności i zaangażowania w kursie
+            </label>
+            <input
+              disabled
+              id="courseEngagement"
+              class="px-1 py-1"
+              v-model="editedUser.courseEngagement"
+              placeholder="Ocena w zakresie 0 - 5."
+              type="number"
+            />
+          </div>
+          <div class="flex-form">
+            <label for="projectDegree">
+              Ocena zadania zaliczeniowego w kursie
+            </label>
+            <input
+              disabled
+              id="projectDegree"
+              class="px-1 py-1"
+              v-model="editedUser.projectDegree"
+              placeholder="Ocena w zakresie 0 - 5."
+              type="number"
+            />
+          </div>
+          <div class="flex-form">
+            <label for="teamProjectDegree">
+              Ocena pracy w zespole w projekcie bonusowym
+            </label>
+            <input
+              disabled
+              id="teamProjectDegree"
+              class="px-1 py-1"
+              v-model="editedUser.teamProjectDegree"
+              placeholder="Ocena w zakresie 0 - 5."
+              type="number"
+            />
+          </div>
+        </div>
+        <div>
+          <span class="p-3 uppercase underline font-bold">Linki</span>
+          <div class="flex-form">
+            <label for="githubUsername"> Nazwa na GitHub </label>
+            <input
+              id="githubUsername"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.githubUsername"
+              placeholder="Nick"
+              type="text"
+            />
+          </div>
+
+          <div class="flex-form">
+            <label for="portfolioUrls"> Linki do portfolio </label>
+            <textarea
+              id="portfolioUrls"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.portfolioUrls"
+              placeholder="Linki oddzielone ','"
+            ></textarea>
+          </div>
+          <div class="flex-form">
+            <label for="projectUrls"> Linki do projektów </label>
+            <textarea
+              id="projectUrls"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.projectUrls"
+              placeholder="Linki oddzielone ','"
+            >
+            </textarea>
+          </div>
+          <div class="flex-form">
+            <label for="bonusProjectUrls"> URL-e do GitHuba. </label>
+            <textarea
+              id="bonusProjectUrls"
+              class="dark-bgc2 px-1 py-1"
+              v-model="editedUser.bonusProjectUrls"
+              placeholder="Linki oddzielone ','"
+            ></textarea>
+          </div>
+        </div>
+      </form>
+      <div class="flex justify-center mb-10 gap-10">
+        <button
+          v-if="type === 'register'"
+          @click.prevent="confirmRegister()"
+          class="add-button px-32 pb-2 mt-2"
+        >
+          Potwierdź Rejestracje
+        </button>
+        <div v-if="type !== 'register'" class="flex gap-10">
+          <button
+            @click.prevent="saveData()"
+            class="add-button px-32 pb-2 mt-2"
+          >
+            Zapisz
+          </button>
+          <button
+            @click.prevent="confirmDialog = true"
+            class="add-button px-32 pb-2 mt-2"
+          >
+            Znalazłem Prace
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <StudentConfirmDialog
+    @confirmAndCloseDialog="confirmAndCloseAccount()"
+    @closeDialog="confirmDialog = false"
+    v-if="confirmDialog"
+  />
+</template>
+
+<script setup lang="ts">
+import { reactive, ref, computed } from 'vue';
+import {
+  required,
+  email,
+  helpers,
+  minLength,
+  sameAs,
+} from '@vuelidate/validators';
+import { useUserStore } from '../../stores/user.js';
+import StudentConfirmDialog from './StudentConfirmDialog.vue';
+import useVuelidate from '@vuelidate/core';
+
+const props = defineProps(['user', 'type', 'rules']);
+const userStore = useUserStore();
+
+const confirmDialog = ref(false);
+
+const confirm = reactive([
+  { text: 'Tak', value: true },
+  { text: 'Nie', value: false },
+]);
+
+const ExpectedTypeWork = reactive([
+  { text: 'Na miejscu', value: 'AT LOCATION' },
+  { text: 'Gotowość do przeprowadzki', value: 'WILLINGNESS TO RELOCATE' },
+  { text: 'Wyłącznie zdalnie', value: 'ONLY REMOTELY' },
+  { text: 'Hybrydowo', value: 'HYBRID' },
+  { text: 'Bez znaczenia', value: 'IRRELEVANT' },
+]);
+
+const ExpectedContractType = reactive([
+  { text: 'Tylko UoP', value: 'ONLY EMPLOYMENT CONTRACT' },
+  { text: 'Możliwe B2B', value: 'POSSIBLE B2B' },
+  {
+    text: 'Możliwe UZ/UoD',
+    value: 'POSSIBLE MANDATE CONTRACT/CONTRACT WORK',
+  },
+  { text: 'Brak preferencji ', value: 'NO PREFERENCES' },
+]);
+
+const editedUser = reactive(Object.assign({}, props.user));
+editedUser.expectedTypeWork = 'IRRELEVANT';
+editedUser.expectedContractType = 'NO PREFERENCES';
+editedUser.canTakeApprenticeship = false;
+
+const rules = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      email: helpers.withMessage('Email musi być poprawny!', email),
+    },
+    firstName: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+    },
+    lastName: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+    },
+    password: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      minLength: helpers.withMessage(
+        'Hasło musi mieć minimum 6 znaków!',
+        minLength(6),
+      ),
+    },
+    confirmPassword: {
+      sameAs: helpers.withMessage(
+        'Hasła muszą być takie same',
+        sameAs(editedUser.password),
+      ),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, editedUser);
+
+function confirmAndCloseAccount() {
+  userStore.closeUserAccount(props.user);
+  confirmDialog.value = false;
+}
+async function confirmRegister() {
+  if (await v$.value.$validate()) {
+    userStore.confirmRegister(editedUser);
+  }
+}
+
+async function saveData() {
+  if (await v$.value.$validate()) {
+    userStore.updateUserData(editedUser);
+  }
+}
+</script>

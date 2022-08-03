@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   AdminFilters,
   CheckRegisterDto,
+  ConfirmRegisterUserDto,
   DefaultResponse,
   EditedUserData,
   FilteredUser,
@@ -242,6 +243,55 @@ export const useUserStore = defineStore('userStore', {
         } else throw new Error();
       } catch (error) {
         snackbarMessage = 'Wystąpił błąd podczas procesu potwierdzania konta';
+        snackbarType = 'error';
+      } finally {
+        snackbarStore.message = snackbarMessage;
+        snackbarStore.type = snackbarType;
+      }
+    },
+    async closeUserAccount(user: FilteredUser) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+      try {
+        const {
+          data: { isSuccess },
+        }: { data: FindUserResponse } = await axios.patch(
+          `api/user/close-account/${user.id}`,
+          user,
+        );
+
+        if (isSuccess) {
+          snackbarMessage = 'Pomyślnie zamknięto konto na portalu.';
+          snackbarType = 'success';
+          router.push('login');
+        } else throw new Error();
+      } catch (error) {
+        snackbarMessage = 'Wystąpił błąd podczas procesu zamykania konta.';
+        snackbarType = 'error';
+      } finally {
+        snackbarStore.message = snackbarMessage;
+        snackbarStore.type = snackbarType;
+      }
+    },
+    async updateUserData(user: ConfirmRegisterUserDto) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+      try {
+        const {
+          data: { isSuccess },
+        }: { data: FindUserResponse } = await axios.patch(
+          `api/user/update/${user.id}`,
+          user,
+        );
+
+        if (isSuccess) {
+          snackbarMessage = 'Pomyślnie zaktualizowano konto.';
+          snackbarType = 'success';
+        } else throw new Error();
+      } catch (error) {
+        snackbarMessage = 'Wystąpił błąd podczas aktualizacji konta konta.';
         snackbarType = 'error';
       } finally {
         snackbarStore.message = snackbarMessage;

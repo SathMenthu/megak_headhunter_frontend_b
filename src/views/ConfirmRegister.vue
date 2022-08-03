@@ -1,8 +1,9 @@
 <template>
   <div class="flex justify-center items-center h-screen">
-    <StudentConfirmRegisterView
+    <StudentEditDataView
       :user="user"
       v-if="user?.permission === 'STUDENT'"
+      :type="'register'"
     />
     <HrConfirmRegisterView :user="user" v-if="user?.permission === 'HR'" />
   </div>
@@ -13,7 +14,7 @@ import { ref, onBeforeMount } from 'vue';
 import { useUserStore } from '../stores/user.js';
 import { FilteredUser } from '../types/index';
 import HrConfirmRegisterView from '../views/hr/HrConfirmRegisterView.vue';
-import StudentConfirmRegisterView from '../views/student/StudentConfirmRegisterView.vue';
+import StudentEditDataView from './student/StudentEditDataView.vue';
 const urlParams = ref(new URLSearchParams(window.location.search));
 const id = ref(urlParams.value.get('id'));
 const token = ref(urlParams.value.get('token'));
