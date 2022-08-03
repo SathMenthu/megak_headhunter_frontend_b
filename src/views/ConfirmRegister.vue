@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount, computed } from 'vue';
 import { useUserStore } from '../stores/user.js';
 import { FilteredUser } from '../types/index';
 import HrConfirmRegisterView from '../views/hr/HrConfirmRegisterView.vue';

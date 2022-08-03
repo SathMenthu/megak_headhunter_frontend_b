@@ -249,22 +249,21 @@ export const useUserStore = defineStore('userStore', {
         snackbarStore.type = snackbarType;
       }
     },
-    async closeUserAccount(user: FilteredUser) {
+    async closeUserAccount(id: string) {
       const snackbarStore = useSnackbarStore();
       let snackbarMessage = '';
       let snackbarType = '';
       try {
         const {
           data: { isSuccess },
-        }: { data: FindUserResponse } = await axios.patch(
-          `api/user/close-account/${user.id}`,
-          user,
+        }: { data: DefaultResponse } = await axios.patch(
+          `api/user/close-account/${id}`,
         );
 
         if (isSuccess) {
           snackbarMessage = 'Pomyślnie zamknięto konto na portalu.';
           snackbarType = 'success';
-          router.push('login');
+          router.push('logout');
         } else throw new Error();
       } catch (error) {
         snackbarMessage = 'Wystąpił błąd podczas procesu zamykania konta.';
@@ -282,7 +281,7 @@ export const useUserStore = defineStore('userStore', {
         const {
           data: { isSuccess },
         }: { data: FindUserResponse } = await axios.patch(
-          `api/user/update/${user.id}`,
+          `api/user/${user.id}`,
           user,
         );
 

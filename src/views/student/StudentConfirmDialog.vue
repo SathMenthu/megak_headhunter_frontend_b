@@ -34,3 +34,13 @@
 <script setup lang="ts">
 defineEmits(['confirmAndCloseDialog', 'closeDialog']);
 </script>
+
+<style>
+.add-button {
+  background-color: #e02735;
+  padding: 5px;
+}
+.add-button:hover {
+  background-color: #e4404e;
+}
+</style>

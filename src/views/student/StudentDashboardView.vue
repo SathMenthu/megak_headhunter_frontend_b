@@ -1,11 +1,7 @@
 <template>
   <div class="flex justify-center items-center h-4/5">
     <div class="h-full">
-      <StudentConfirmRegisterView
-        :user="authStore.user"
-        :buttonText="'Zapisz'"
-        :header-text="'Twoje Dane'"
-      />
+      <StudentConfirmRegisterView :user="authStore.user" />
     </div>
   </div>
 </template>

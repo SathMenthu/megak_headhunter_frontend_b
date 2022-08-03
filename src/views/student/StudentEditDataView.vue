@@ -1,9 +1,19 @@
 <template>
   <div class="dark-bgc">
     <div class="dark-bgc p-2 grid mt-2">
-      <span class="font-bold text-4xl mb-10 p-5">{{
-        type === 'Rejestracja' ? 'Rejestracja' : 'Twoje Dane'
-      }}</span>
+      <div class="p-5 mb-10 flex items-center gap-20">
+        <span class="font-bold text-4xl">{{
+          type === 'register' ? 'Rejestracja' : 'Twoje Dane'
+        }}</span>
+
+        <div v-if="type !== 'register'">
+          <span class="font-bold text-xl mr-3">Twój Aktualny Status:</span>
+          <span class="font-bold p-2 border text-blue-400"
+            >{{ translator(editedUser.studentStatus) }}
+          </span>
+        </div>
+      </div>
+
       <form class="grid grid-cols-5 justify-items-center">
         <div>
           <span class="p-3 uppercase underline font-bold">Dane Podstawowe</span>
@@ -17,8 +27,11 @@
               placeholder="Email"
               type="email"
             />
-            <span v-if="v$.email.$error" class="valid">{{
-              v$.email.$errors[0].$message
+            <span v-if="v$register.email.$error" class="valid">{{
+              v$register.email.$errors[0].$message
+            }}</span>
+            <span v-if="v$update.email.$error" class="valid">{{
+              v$update.email.$errors[0].$message
             }}</span>
           </div>
           <div class="flex-form" v-if="type === 'register'">
@@ -30,8 +43,8 @@
               placeholder="Hasło"
               type="password"
             />
-            <span v-if="v$.password.$error" class="ml-5 valid mt-2">{{
-              v$.password.$errors[0].$message
+            <span v-if="v$register.password.$error" class="ml-5 valid mt-2">{{
+              v$register.password.$errors[0].$message
             }}</span>
           </div>
           <div class="flex-form" v-if="type === 'register'">
@@ -41,10 +54,10 @@
               class="dark-bgc2 px-1 py-1"
               v-model="editedUser.confirmPassword"
               placeholder="Potwierdź Hasło"
-              type="confirmPassword"
+              type="password"
             />
-            <span v-if="v$.confirmPassword.$error" class="valid mt-2">{{
-              v$.confirmPassword.$errors[0].$message
+            <span v-if="v$register.confirmPassword.$error" class="valid mt-2">{{
+              v$register.confirmPassword.$errors[0].$message
             }}</span>
           </div>
           <div class="flex-form">
@@ -56,8 +69,11 @@
               placeholder="Imię"
               type="text"
             />
-            <span v-if="v$.firstName.$error" class="valid">{{
-              v$.firstName.$errors[0].$message
+            <span v-if="v$register.firstName.$error" class="valid">{{
+              v$register.firstName.$errors[0].$message
+            }}</span>
+            <span v-if="v$update.firstName.$error" class="valid">{{
+              v$update.firstName.$errors[0].$message
             }}</span>
           </div>
           <div class="flex-form">
@@ -69,8 +85,11 @@
               placeholder="Nazwisko"
               type="text"
             />
-            <span v-if="v$.lastName.$error" class="valid">{{
-              v$.lastName.$errors[0].$message
+            <span v-if="v$register.lastName.$error" class="valid">{{
+              v$register.lastName.$errors[0].$message
+            }}</span>
+            <span v-if="v$update.lastName.$error" class="valid">{{
+              v$update.lastName.$errors[0].$message
             }}</span>
           </div>
           <div class="flex-form">
@@ -339,8 +358,9 @@ import {
 import { useUserStore } from '../../stores/user.js';
 import StudentConfirmDialog from './StudentConfirmDialog.vue';
 import useVuelidate from '@vuelidate/core';
+import { translator } from '../../components/dictionary/dictionary';
 
-const props = defineProps(['user', 'type', 'rules']);
+const props = defineProps(['user', 'type']);
 const userStore = useUserStore();
 
 const confirmDialog = ref(false);
@@ -369,11 +389,13 @@ const ExpectedContractType = reactive([
 ]);
 
 const editedUser = reactive(Object.assign({}, props.user));
-editedUser.expectedTypeWork = 'IRRELEVANT';
-editedUser.expectedContractType = 'NO PREFERENCES';
-editedUser.canTakeApprenticeship = false;
+if (props.type === 'register') {
+  editedUser.expectedTypeWork = 'IRRELEVANT';
+  editedUser.expectedContractType = 'NO PREFERENCES';
+  editedUser.canTakeApprenticeship = false;
+}
 
-const rules = computed(() => {
+const rulesRegister = computed(() => {
   return {
     email: {
       required: helpers.withMessage('Pole nie może być puste!', required),
@@ -401,20 +423,51 @@ const rules = computed(() => {
   };
 });
 
-const v$ = useVuelidate(rules, editedUser);
+const rulesUpdate = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      email: helpers.withMessage('Email musi być poprawny!', email),
+    },
+    firstName: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+    },
+    lastName: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+    },
+  };
+});
+
+const v$register = useVuelidate(rulesRegister, editedUser);
+const v$update = useVuelidate(rulesUpdate, editedUser);
 
 function confirmAndCloseAccount() {
-  userStore.closeUserAccount(props.user);
+  userStore.closeUserAccount(props.user.id);
   confirmDialog.value = false;
 }
 async function confirmRegister() {
-  if (await v$.value.$validate()) {
+  if (await v$register.value.$validate()) {
     userStore.confirmRegister(editedUser);
   }
 }
 
 async function saveData() {
-  if (await v$.value.$validate()) {
+  if (await v$update.value.$validate()) {
+    editedUser.bonusProjectUrls =
+      typeof editedUser.bonusProjectUrls === 'string'
+        ? editedUser.bonusProjectUrls.split(',')
+        : editedUser.bonusProjectUrls;
+
+    editedUser.portfolioUrls =
+      typeof editedUser.portfolioUrls === 'string'
+        ? editedUser.portfolioUrls.split(',')
+        : editedUser.portfolioUrls;
+
+    editedUser.projectUrls =
+      typeof editedUser.projectUrls === 'string'
+        ? editedUser.projectUrls.split(',')
+        : editedUser.projectUrls;
+
     userStore.updateUserData(editedUser);
   }
 }

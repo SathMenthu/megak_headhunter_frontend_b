@@ -1,6 +1,6 @@
 <template>
   <div class="dark-bgc">
-    <div class="dark-bgc p-2 grid mt-3">
+    <div class="dark-bgc p-5 grid mt-3">
       <span class="font-bold text-center text-lg"
         >Potwierdzenie Rejestracji</span
       >
@@ -15,6 +15,35 @@
             placeholder="Email"
             type="email"
           />
+          <span v-if="v$.email.$error" class="valid mt-2">{{
+            v$.email.$errors[0].$message
+          }}</span>
+        </div>
+        <div class="flex-form">
+          <label for="password"> Hasło </label>
+          <input
+            id="password"
+            class="dark-bgc2 px-1 py-1"
+            v-model="editedUser.password"
+            placeholder="Hasło"
+            type="password"
+          />
+          <span v-if="v$.password.$error" class="ml-5 valid mt-2">{{
+            v$.password.$errors[0].$message
+          }}</span>
+        </div>
+        <div class="flex-form">
+          <label for="confirmPassword" class="">Potwierdź Hasło </label>
+          <input
+            id="confirmPassword"
+            class="dark-bgc2 px-1 py-1"
+            v-model="editedUser.confirmPassword"
+            placeholder="Potwierdź Hasło"
+            type="password"
+          />
+          <span v-if="v$.confirmPassword.$error" class="valid mt-2">{{
+            v$.confirmPassword.$errors[0].$message
+          }}</span>
         </div>
         <div class="flex-form">
           <label for="name" class=""> Imię </label>
@@ -25,6 +54,9 @@
             placeholder="Imię"
             type="text"
           />
+          <span v-if="v$.firstName.$error" class="valid mt-2">{{
+            v$.firstName.$errors[0].$message
+          }}</span>
         </div>
         <div class="flex-form">
           <label for="lastName"> Nazwisko </label>
@@ -35,6 +67,9 @@
             placeholder="Nazwisko"
             type="text"
           />
+          <span v-if="v$.lastName.$error" class="valid mt-2">{{
+            v$.lastName.$errors[0].$message
+          }}</span>
         </div>
 
         <div class="flex-form">
@@ -58,14 +93,55 @@
 </template>
 
 <script setup lang="ts">
+import { computed, reactive } from 'vue';
 import { useUserStore } from '../../stores/user.js';
+import {
+  required,
+  email,
+  helpers,
+  minLength,
+  sameAs,
+} from '@vuelidate/validators';
+import useVuelidate from '@vuelidate/core';
 
 const props = defineProps(['user']);
 const userStore = useUserStore();
 
-const editedUser = Object.assign({}, props.user);
+const editedUser = reactive(Object.assign({}, props.user));
 
-function submitForm() {
-  userStore.confirmRegister(editedUser);
+const rules = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      email: helpers.withMessage('Email musi być poprawny!', email),
+    },
+    firstName: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+    },
+    lastName: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+    },
+    password: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      minLength: helpers.withMessage(
+        'Hasło musi mieć minimum 6 znaków!',
+        minLength(6),
+      ),
+    },
+    confirmPassword: {
+      sameAs: helpers.withMessage(
+        'Hasła muszą być takie same',
+        sameAs(editedUser.password),
+      ),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, editedUser);
+
+async function submitForm() {
+  if (await v$.value.$validate()) {
+    userStore.confirmRegister(editedUser);
+  }
 }
 </script>
