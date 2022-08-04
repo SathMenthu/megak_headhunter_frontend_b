@@ -19,7 +19,7 @@ const authStore = useAuthStore();
 
 <style>
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Catamaran';
   background-color: #222224;
   color: #f7f7f7;
 }
@@ -75,10 +75,10 @@ html {
 }
 
 .add-button {
-  background-color: #e02735;
+  background-color: #e02735 !important;
   padding: 5px;
 }
 .add-button:hover {
-  background-color: #e4404e;
+  background-color: #e4404e !important;
 }
 </style>

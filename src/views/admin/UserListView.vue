@@ -235,7 +235,7 @@ function getDataTable() {
   userStore
     .getAllUsersData(currentPage.value, limit.value, filters)
     .then((value) => {
-      if (value) total.value = value;
+      total.value = value ? value : 0;
     });
 }
 
