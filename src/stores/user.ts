@@ -25,6 +25,7 @@ export const useUserStore = defineStore('userStore', {
     userList: [] as FilteredUser[],
     userForHR: [] as FilteredUser[],
     userForTargetHR: [] as FilteredUser[],
+    targetUser: {} as FilteredUser,
   }),
   getters: {},
   actions: {
@@ -176,6 +177,7 @@ export const useUserStore = defineStore('userStore', {
         if (isSuccess) {
           snackbarMessage = 'Pomyślnie zablokowano użytkownika.';
           snackbarType = 'success';
+          return true;
         }
       } catch (error) {
         snackbarMessage = 'Wystąpił błąd podczas blokowania użytkownika.';
@@ -296,8 +298,39 @@ export const useUserStore = defineStore('userStore', {
           snackbarType = 'success';
         } else throw new Error();
       } catch (error) {
-        snackbarMessage = 'Wystąpił błąd podczas aktualizacji konta konta.';
+        snackbarMessage = 'Wystąpił błąd podczas aktualizacji konta.';
         snackbarType = 'error';
+      } finally {
+        snackbarStore.message = snackbarMessage;
+        snackbarStore.type = snackbarType;
+      }
+    },
+    async changeStudentStatus(id: string, status: StudentStatus) {
+      const snackbarStore = useSnackbarStore();
+      let snackbarMessage = '';
+      let snackbarType = '';
+
+      const payload = {
+        status,
+      };
+      try {
+        const {
+          data: { isSuccess },
+        }: { data: FindUserResponse } = await axios.patch(
+          `api/user/change-student-status/${id}`,
+          payload,
+        );
+
+        if (isSuccess) {
+          snackbarMessage = 'Pomyślnie zmieniono status studenta.';
+          snackbarType = 'success';
+          return true;
+        } else throw new Error();
+      } catch (error) {
+        snackbarMessage =
+          'Wystąpił błąd podczas aktualizacji zmiany statusu studenta.';
+        snackbarType = 'error';
+        return false;
       } finally {
         snackbarStore.message = snackbarMessage;
         snackbarStore.type = snackbarType;
@@ -354,6 +387,7 @@ export const useUserStore = defineStore('userStore', {
       const authStore = useAuthStore();
 
       const payload: FilterPayloadForHr<HrFilters> = {
+        id: authStore.user?.id,
         page,
         limit,
         filters,
@@ -364,7 +398,7 @@ export const useUserStore = defineStore('userStore', {
         const {
           data: { users, isSuccess, total },
         }: { data: FindUsersResponse } = await axios.post(
-          `api/user/users-for-hr/${authStore.user?.id}`,
+          `api/user/users-for-hr`,
           payload,
         );
         if (isSuccess) {

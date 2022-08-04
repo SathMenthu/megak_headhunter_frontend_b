@@ -63,7 +63,7 @@
         Zgoda na odbycie bezpłatnych praktyk/stażu na początek
       </div>
       <div class="item-in-hr-table mt-4 uppercase font-bold">
-        {{ user.canTakeApprenticeship || 'nie' }}
+        {{ user.canTakeApprenticeship ? 'tak' : 'nie' }}
       </div>
     </div>
     <div class="grid mt-4 expanded-item w-fit p-2">

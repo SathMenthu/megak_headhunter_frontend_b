@@ -4,6 +4,7 @@ import AdminDashboardView from '../views/admin/AdminDashboardView.vue';
 import HrDashboardView from '../views/hr/HrDashboardView.vue';
 import StudentDashboardView from '../views/student/StudentDashboardView.vue';
 import NoPageFound from '../views/NoPageFound.vue';
+import UserCV from '../views/student/ShowCV.vue';
 import Logout from '../views/Logout.vue';
 import ConfirmRegister from '../views/ConfirmRegister.vue';
 import { userRedirect } from '../helpers/UserRedirect';
@@ -44,6 +45,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/hr-dashboard',
     component: HrDashboardView,
+    meta: {
+      requireAuth: true,
+      requireHr: true,
+    },
+  },
+  {
+    path: '/user-cv',
+    component: UserCV,
     meta: {
       requireAuth: true,
       requireHr: true,

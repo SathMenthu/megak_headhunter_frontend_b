@@ -2,10 +2,12 @@
   <nav>
     <div class="w-full h-14 text-white flex justify-between">
       <div class="w-full ml-64">
-        <img
-          class="cursor-pointer object-contain p-2 h-14"
-          src="../../assets/logo.webp"
-        />
+        <button @click="router.push('login')">
+          <img
+            class="cursor-pointer object-contain p-2 h-14"
+            src="../../assets/logo.webp"
+          />
+        </button>
       </div>
 
       <div class="mr-64 w-full">
@@ -52,6 +54,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import router from '../../router';
 import { useAuthStore } from '../../stores/auth';
 
 const dropMenu = ref(false);

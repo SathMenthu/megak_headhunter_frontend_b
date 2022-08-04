@@ -34,7 +34,10 @@ export const translator = (text: string | boolean | null) => {
       return 'Możliwe UZ/UoD';
     case 'NO PREFERENCES':
       return 'Brak preferencji';
-
+    case false:
+      return 'NIE';
+    case true:
+      return 'TAK';
     default:
       return text;
   }
