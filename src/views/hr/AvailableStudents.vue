@@ -41,7 +41,10 @@
           >{{ user.firstName }} {{ user.lastName[0] }}.</span
         >
         <div class="flex items-center">
-          <button class="add-button px-2 py-1.5" @click="reserveTargetUser(user)">
+          <button
+            class="add-button px-2 py-1.5"
+            @click="reserveTargetUser(user)"
+          >
             Zarezerwuj rozmowę
           </button>
           <mdicon
@@ -54,7 +57,6 @@
       </div>
 
       <ItemInHrTable v-if="targerUser === user" :user="user" />
-
     </div>
   </div>
   <div class="flex justify-end mt-4 text-sm">
@@ -70,7 +72,9 @@
       </select>
     </div>
     <div class="mr-3">
-      {{ limit === 99999 ? total : userStore.userForHR.length }} z
+      {{ itemsInPage }}
+
+      z
       {{ total }}
     </div>
     <button
@@ -117,11 +121,12 @@ import { useUserStore } from '../../stores/user';
 import { StudentStatus } from '../../types/enums/student.status.enum';
 import ItemInHrTable from './ItemInHrTable.vue';
 import HrFilterModal from '../../components/filters/HrFilterModal.vue';
+import { calcItemsInPag } from '../../components/pagination/calcItemsInPag';
 
 const userStore = useUserStore();
 const globalStore = useGlobalStore();
 const studentStatus = ref<StudentStatus>(StudentStatus.AVAILABLE);
-
+const itemsInPage = ref(0);
 let currentPage = ref(1);
 const total = ref(0);
 const limit = ref(10);
@@ -169,6 +174,12 @@ function getDataTable() {
     )
     .then((value) => {
       total.value = value ? value : 0;
+      itemsInPage.value = calcItemsInPag(
+        limit.value,
+        total.value,
+        currentPage.value,
+        userStore.userForHR.length,
+      );
     });
 }
 async function updateFilters(newFilters: HrFilters) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex ml-40">
+  <div class="flex ml-40 text-xs">
     <button
       class="flex pt-7 h-fit items-center"
       @click="router.push('hr-dashboard')"
@@ -36,7 +36,7 @@
               {{ user.phoneNumber?.toString().slice(6, 9) }}</span
             >
           </div>
-          <div class="flex w-full mt-4 mb-5">
+          <div class="flex w-full mt-4 mb-5 text-xs">
             <mdicon class="mx-4" name="mail"> </mdicon>
             <span> {{ user.email }}</span>
           </div>
@@ -63,13 +63,13 @@
             <div class="card max-h-14 flex">
               <span class="text-lg font-bold h-full p-4">Oceny</span>
             </div>
-            <div class="flex content-cv">
+            <div class="flex">
               <div class="flex">
                 <div class="p-5">
                   <span class="text-sm font-bold header"
                     >Ocena przejścia kursu</span
                   >
-                  <div class="mt-4 flex">
+                  <div class="mt-4 flex items-center">
                     <span class="font-bold"
                       >{{ user.courseCompletion || '- ' }}
                     </span>
@@ -93,7 +93,7 @@
                   <span class="text-sm font-bold header"
                     >Ocena aktywności i zaangażowanie w kursie</span
                   >
-                  <div class="mt-4 flex">
+                  <div class="mt-4 flex items-center">
                     <span class="font-bold"
                       >{{ user.courseEngagement || '- ' }}
                     </span>
@@ -117,7 +117,7 @@
                   <span class="text-sm font-bold header"
                     >Ocena kodu w projekcie własnym</span
                   >
-                  <div class="mt-4 flex">
+                  <div class="mt-4 flex items-center">
                     <span class="font-bold"
                       >{{ user.projectDegree || '- ' }}
                     </span>
@@ -141,7 +141,7 @@
                   <span class="text-sm font-bold header"
                     >Ocena pracy w zespole w Scrum</span
                   >
-                  <div class="mt-4 flex">
+                  <div class="mt-4 flex items-center">
                     <span class="font-bold"
                       >{{ user.teamProjectDegree || '- ' }}
                     </span>
@@ -380,9 +380,5 @@ async function UnreserveStudent() {
 
 .header {
   color: #4d4d4d;
-}
-
-.content-cv {
-  background-color: #23242479 !important;
 }
 </style>
