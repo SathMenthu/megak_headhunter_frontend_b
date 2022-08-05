@@ -28,11 +28,18 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ContentLayout from '../../components/layout/ContentLayout.vue';
+import { useUserStore } from '../../stores/user';
 import AvailableStudents from './AvailableStudents.vue';
 import InterviewStudents from './InterviewStudents.vue';
 
 const availableStudentsMenu = ref(true);
 const interviewStudentsMenu = ref(false);
+const userStore = useUserStore();
+
+if (userStore.targetUser) {
+  availableStudentsMenu.value = false;
+  interviewStudentsMenu.value = true;
+}
 
 function selectOneTab(tabName: string) {
   switch (tabName) {
