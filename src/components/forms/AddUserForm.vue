@@ -99,14 +99,14 @@
         placeholder="Firma"
         type="text"
       />
-      <label v-if="user.permission === 'HR'" for="maxReservedStudents">
-        Limit Rezerwacji Kursantów:
-      </label>
       <span
         v-if="user.permission === 'HR' && v$.company.$error"
         class="valid"
         >{{ v$.company.$errors[0].$message }}</span
       >
+      <label v-if="user.permission === 'HR'" for="maxReservedStudents">
+        Limit Rezerwacji Kursantów:
+      </label>
       <input
         id="maxReservedStudents"
         class="dark-bgc2 px-1 py-1 w-1/3"
@@ -115,6 +115,7 @@
         type="number"
         v-if="user.permission === 'HR'"
       />
+
       <span
         v-if="user.permission === 'HR' && v$.maxReservedStudents.$error"
         class="valid"
