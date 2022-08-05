@@ -5,7 +5,7 @@
       <div class="flex justify-between mb-4">
         <h2 class="font-bold">Filtrowanie</h2>
         <button class="btn-clear" @click="resetFilter()">
-          Wyczyść Wszystko
+          Wyczyść wszystkie
         </button>
       </div>
 

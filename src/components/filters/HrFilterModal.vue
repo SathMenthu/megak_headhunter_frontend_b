@@ -5,7 +5,7 @@
       <div class="flex justify-between mt-3 mb-4">
         <h2 class="font-bold">Filtrowanie</h2>
         <button class="btn-clear" @click="resetFilter()">
-          Wyczyść Wszystko
+          Wyczyść wszystkie
         </button>
       </div>
 
@@ -123,7 +123,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1">Preferowane Miejsce Pracy</span>
+        <span class="text-sm mb-1">Preferowane miejsce pracy</span>
         <div class="flex w-fit">
           <div
             class="flex items-center dark-bgc m-1 p-1 text-xs cursor-pointer"
@@ -255,7 +255,7 @@ let filters = reactive<HrFilters>({
 
 const expectedTypeWork = reactive([
   {
-    text: 'Praca Zdalna',
+    text: 'Praca zdalna',
     value: ExpectedTypeWorkEnum['ONLY REMOTELY'],
   },
   { text: 'Praca w biurze', value: ExpectedTypeWorkEnum['AT LOCATION'] },
