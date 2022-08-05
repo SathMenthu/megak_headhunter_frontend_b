@@ -78,12 +78,6 @@
         </div>
       </div>
 
-      <ReservationStudentAlert
-        @confirmAndCloseDialog="reserveTargetUser(user)"
-        @closeDialog="showReserveAlert = false"
-        v-if="showReserveAlert"
-        :user="user"
-      />
       <ItemInHrTable v-if="targerUser === user" :user="user" />
     </div>
   </div>
@@ -146,7 +140,6 @@ import { useGlobalStore } from '../../stores/global';
 import { useUserStore } from '../../stores/user';
 import { StudentStatus } from '../../types/enums/student.status.enum';
 import ItemInHrTable from './ItemInHrTable.vue';
-import ReservationStudentAlert from './ReservationStudentAlert.vue';
 import router from '../../router';
 import HrFilterModal from '../../components/filters/HrFilterModal.vue';
 

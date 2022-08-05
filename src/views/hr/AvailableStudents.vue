@@ -41,10 +41,7 @@
           >{{ user.firstName }} {{ user.lastName[0] }}.</span
         >
         <div class="flex items-center">
-          <button
-            class="add-button px-2 py-1.5"
-            @click="showReserveAlert = true"
-          >
+          <button class="add-button px-2 py-1.5" @click="reserveTargetUser(user)">
             Zarezerwuj rozmowę
           </button>
           <mdicon
@@ -57,12 +54,7 @@
       </div>
 
       <ItemInHrTable v-if="targerUser === user" :user="user" />
-      <ReservationStudentAlert
-        @confirmAndCloseDialog="reserveTargetUser(user)"
-        @closeDialog="showReserveAlert = false"
-        v-if="showReserveAlert"
-        :user="user"
-      />
+
     </div>
   </div>
   <div class="flex justify-end mt-4 text-sm">
@@ -124,7 +116,6 @@ import { useGlobalStore } from '../../stores/global';
 import { useUserStore } from '../../stores/user';
 import { StudentStatus } from '../../types/enums/student.status.enum';
 import ItemInHrTable from './ItemInHrTable.vue';
-import ReservationStudentAlert from './ReservationStudentAlert.vue';
 import HrFilterModal from '../../components/filters/HrFilterModal.vue';
 
 const userStore = useUserStore();
