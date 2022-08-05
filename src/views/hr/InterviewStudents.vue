@@ -78,12 +78,6 @@
         </div>
       </div>
 
-      <ReservationStudentAlert
-        @confirmAndCloseDialog="reserveTargetUser(user)"
-        @closeDialog="showReserveAlert = false"
-        v-if="showReserveAlert"
-        :user="user"
-      />
       <ItemInHrTable v-if="targerUser === user" :user="user" />
     </div>
   </div>
@@ -100,7 +94,8 @@
       </select>
     </div>
     <div class="mr-3">
-      {{ limit === 99999 ? total : userStore.userForTargetHR.length }} z
+      {{ itemsInPage }}
+      z
       {{ total }}
     </div>
     <button
@@ -146,15 +141,15 @@ import { useGlobalStore } from '../../stores/global';
 import { useUserStore } from '../../stores/user';
 import { StudentStatus } from '../../types/enums/student.status.enum';
 import ItemInHrTable from './ItemInHrTable.vue';
-import ReservationStudentAlert from './ReservationStudentAlert.vue';
 import router from '../../router';
 import HrFilterModal from '../../components/filters/HrFilterModal.vue';
+import { calcItemsInPag } from '../../components/pagination/calcItemsInPag';
 
 const userStore = useUserStore();
 const globalStore = useGlobalStore();
 const studentStatus = ref<StudentStatus>(StudentStatus.BUSY);
 const hrFiltersModal = ref(false);
-
+const itemsInPage = ref(0);
 let currentPage = ref(1);
 const total = ref(0);
 const limit = ref(10);
@@ -209,6 +204,12 @@ function getDataTable() {
     )
     .then((value) => {
       total.value = value ? value : 0;
+      itemsInPage.value = calcItemsInPag(
+        limit.value,
+        total.value,
+        currentPage.value,
+        userStore.userForTargetHR.length,
+      );
     });
 }
 

@@ -118,7 +118,8 @@
       </select>
     </div>
     <div class="mr-3">
-      {{ limit === 99999 ? total : userStore.userList.length }} z
+      {{ itemsInPage }}
+      z
       {{ total }}
     </div>
     <button
@@ -178,6 +179,7 @@ import { ref, reactive, watch } from 'vue';
 import AdminFilterModal from '../../components/filters/AdminFilterModal.vue';
 import BlockTargetUserModal from '../../components/modals/user/BlockTargetUserModal.vue';
 import ChangePasswordForTargetUserModal from '../../components/modals/user/ChangePasswordForTargetUserModal.vue';
+import { calcItemsInPag } from '../../components/pagination/calcItemsInPag';
 import { useGlobalStore } from '../../stores/global';
 import { useUserStore } from '../../stores/user';
 import {
@@ -203,6 +205,7 @@ const limit = ref(10);
 const adminFiltersModal = ref(false);
 const blockTargetUserModal = ref(false);
 const changePasswordForTargerUserModal = ref(false);
+const itemsInPage = ref(0);
 const roles = reactive([
   { text: 'Wszystkie', value: null },
   { text: 'Student', value: RoleEnum.STUDENT },
@@ -236,6 +239,12 @@ function getDataTable() {
     .getAllUsersData(currentPage.value, limit.value, filters)
     .then((value) => {
       total.value = value ? value : 0;
+      itemsInPage.value = calcItemsInPag(
+        limit.value,
+        total.value,
+        currentPage.value,
+        userStore.userList.length,
+      );
     });
 }
 
