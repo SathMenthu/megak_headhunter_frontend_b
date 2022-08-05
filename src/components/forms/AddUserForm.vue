@@ -50,7 +50,7 @@
         }}</span>
       </div>
       <div class="grid gap-1" v-if="user.permission === 'STUDENT'">
-        <label for="courseEngagement" >
+        <label for="courseEngagement">
           Ocena aktywności i zaangażowania na kursie
         </label>
         <input
@@ -171,7 +171,7 @@ async function submitForm() {
       user.value.company = '';
       user.value.maxReservedStudents = 1;
       user.value.permission = props.role;
-      user.courseCompletion = null;
+      user.value.courseCompletion = null;
       user.value.courseEngagement = null;
       user.value.projectDegree = null;
       user.value.teamProjectDegree = null;
