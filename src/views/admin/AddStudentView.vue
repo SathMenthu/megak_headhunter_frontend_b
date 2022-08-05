@@ -3,9 +3,9 @@
     <AddUserForm :role="role" :rules="rules" />
   </div>
 
-  <div class="dark-bgc p-2 mt-3 flex flex-col gap-5">
+  <div class="dark-bgc p-2 mt-1 flex flex-col gap-5">
     <span class="p-1 font-bold">Import Użytkowników</span>
-    <div class="mb-12 pl-6 flex flex-col w-1/3">
+    <div class="mb-1 pl-6 flex flex-col w-1/3">
       <input ref="file" class="p-3 border mb-6" type="file" />
       <button class="add-button" @click="sendUsersToImport()">Wyślij</button>
     </div>
@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import AddUserForm from '../../components/forms/AddUserForm.vue';
-import { required, email, helpers } from '@vuelidate/validators';
+import { required, email, helpers, between } from '@vuelidate/validators';
 import { useUserStore } from '../../stores/user';
 
 const userStore = useUserStore();
@@ -34,6 +34,34 @@ const rules = computed(() => {
     },
     lastName: {
       required: helpers.withMessage('Pole nie może być puste!', required),
+    },
+    courseCompletion: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      between: helpers.withMessage(
+        'Ocena musi być w przedziale od 1 do 5',
+        between(1, 5),
+      ),
+    },
+    courseEngagement: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      between: helpers.withMessage(
+        'Ocena musi być w przedziale od 1 do 5',
+        between(1, 5),
+      ),
+    },
+    projectDegree: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      between: helpers.withMessage(
+        'Ocena musi być w przedziale od 1 do 5',
+        between(1, 5),
+      ),
+    },
+    teamProjectDegree: {
+      required: helpers.withMessage('Pole nie może być puste!', required),
+      between: helpers.withMessage(
+        'Ocena musi być w przedziale od 1 do 5',
+        between(1, 5),
+      ),
     },
   };
 });

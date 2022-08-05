@@ -2,7 +2,7 @@
   <div class="text-white flex justify-center items-center h-screen">
     <div class="grid place-items-center w-1/5">
       <img class="object-contain mb-5 w-32" src="../assets/logo.webp" />
-      <form class="w-full mb-3">
+      <form class="w-full mb-3" v-on:keyup.enter="submitForm()">
         <div class="rounded mb-2">
           <div>
             <input

@@ -1,11 +1,11 @@
 <template>
   <div class="dark-bgc p-2 grid gap-5 mt-3">
     <span class="p-1 font-bold">Dodawanie Użytkownika</span>
-    <form class="flex flex-col w-1/3 gap-1 pl-6">
+    <form class="flex flex-col gap-1 pl-6">
       <label for="email" class=""> Email </label>
       <input
         id="email"
-        class="dark-bgc2 px-1 py-1"
+        class="dark-bgc2 px-1 py-1 w-1/3"
         v-model="user.email"
         placeholder="Email"
         type="email"
@@ -16,7 +16,7 @@
       <label for="name" class=""> Imię </label>
       <input
         id="firstName"
-        class="dark-bgc2 px-1 py-1"
+        class="dark-bgc2 px-1 py-1 w-1/3"
         v-model="user.firstName"
         placeholder="Imię"
         type="text"
@@ -27,7 +27,7 @@
       <label for="lastName"> Nazwisko </label>
       <input
         id="lastName"
-        class="dark-bgc2 px-1 py-1"
+        class="dark-bgc2 px-1 py-1 w-1/3"
         v-model="user.lastName"
         placeholder="Nazwisko"
         type="text"
@@ -35,11 +35,66 @@
       <span v-if="v$.lastName.$error" class="valid">{{
         v$.lastName.$errors[0].$message
       }}</span>
+
+      <div class="grid gap-1" v-if="user.permission === 'STUDENT'">
+        <label for="courseCompletion"> Ocena przejścia kursu </label>
+        <input
+          id="courseCompletion"
+          class="dark-bgc2 px-1 py-1 w-1/3"
+          v-model="user.courseCompletion"
+          placeholder="Ocena od 1 do 5"
+          type="number"
+        />
+        <span v-if="v$.courseCompletion.$error" class="valid">{{
+          v$.courseCompletion.$errors[0].$message
+        }}</span>
+      </div>
+      <div class="grid gap-1" v-if="user.permission === 'STUDENT'">
+        <label for="courseEngagement" >
+          Ocena aktywności i zaangażowania na kursie
+        </label>
+        <input
+          id="courseEngagement"
+          class="dark-bgc2 px-1 py-1 w-1/3"
+          v-model="user.courseEngagement"
+          placeholder="Ocena od 1 do 5"
+          type="number"
+        />
+        <span v-if="v$.courseEngagement.$error" class="valid">{{
+          v$.courseEngagement.$errors[0].$message
+        }}</span>
+      </div>
+      <div class="grid gap-1" v-if="user.permission === 'STUDENT'">
+        <label for="projectDegree"> Ocena kodu w projekcie własnym </label>
+        <input
+          id="projectDegree"
+          class="dark-bgc2 px-1 py-1 w-1/3"
+          v-model="user.projectDegree"
+          placeholder="Ocena od 1 do 5"
+          type="number"
+        />
+        <span v-if="v$.projectDegree.$error" class="valid">{{
+          v$.projectDegree.$errors[0].$message
+        }}</span>
+      </div>
+      <div class="grid gap-1" v-if="user.permission === 'STUDENT'">
+        <label for="teamProjectDegree"> Ocena pracy w zespole w Scrum </label>
+        <input
+          id="teamProjectDegree"
+          class="dark-bgc2 px-1 py-1 w-1/3"
+          v-model="user.teamProjectDegree"
+          placeholder="Ocena od 1 do 5"
+          type="number"
+        />
+        <span v-if="v$.teamProjectDegree.$error" class="valid">{{
+          v$.teamProjectDegree.$errors[0].$message
+        }}</span>
+      </div>
       <label v-if="user.permission === 'HR'" for="company"> Firma </label>
       <input
         v-if="user.permission === 'HR'"
         id="company"
-        class="dark-bgc2 px-1 py-1"
+        class="dark-bgc2 px-1 py-1 w-fit"
         v-model="user.company"
         placeholder="Firma"
         type="text"
@@ -54,7 +109,7 @@
       >
       <input
         id="maxReservedStudents"
-        class="dark-bgc2 px-1 py-1"
+        class="dark-bgc2 px-1 py-1 w-1/3"
         v-model="user.maxReservedStudents"
         placeholder="Limit Rezerwacji Kursantów"
         type="number"
@@ -68,13 +123,13 @@
       <label for="permission"> Rola: </label>
       <input
         id="permission"
-        class="px-1 py-1"
+        class="px-1 py-1 w-1/3"
         v-model="user.permission"
         placeholder="Rola"
         type="text"
         disabled
       />
-      <button @click.prevent="submitForm()" class="add-button mt-4 mb-10">
+      <button @click.prevent="submitForm()" class="add-button mt-4 mb-10 w-1/3">
         Dodaj
       </button>
     </form>
@@ -82,7 +137,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, computed } from 'vue';
+import { ref } from 'vue';
 import { useUserStore } from '../../stores/user.js';
 import { ManuallyCreatedUser } from '../../types/index.js';
 import useVuelidate from '@vuelidate/core';
@@ -90,28 +145,36 @@ import useVuelidate from '@vuelidate/core';
 const userStore = useUserStore();
 
 const props = defineProps(['role', 'rules']);
-const user = reactive<ManuallyCreatedUser>({
+const user = ref<ManuallyCreatedUser>({
   firstName: '',
   lastName: '',
   email: '',
   company: '',
   maxReservedStudents: 1,
   permission: props.role,
+  courseCompletion: null,
+  courseEngagement: null,
+  projectDegree: null,
+  teamProjectDegree: null,
 });
 
 const v$ = useVuelidate(props.rules, user);
 
 async function submitForm() {
   if (await v$.value.$validate()) {
-    const isSuccess = await userStore.createUser(user);
+    const isSuccess = await userStore.createUser(user.value);
     if (isSuccess) {
       v$.value.$reset();
-      user.firstName = '';
-      user.lastName = '';
-      user.email = '';
-      user.company = '';
-      user.maxReservedStudents = 1;
-      user.permission = props.role;
+      user.value.firstName = '';
+      user.value.lastName = '';
+      user.value.email = '';
+      user.value.company = '';
+      user.value.maxReservedStudents = 1;
+      user.value.permission = props.role;
+      user.courseCompletion = null;
+      user.value.courseEngagement = null;
+      user.value.projectDegree = null;
+      user.value.teamProjectDegree = null;
     }
   }
 }
