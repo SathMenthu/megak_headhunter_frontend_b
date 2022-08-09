@@ -1,6 +1,6 @@
 <template>
   <div class="fixed inset-0 filter-bg transition-opacity"></div>
-  <div class="fixed mt-16 w-1/3 p-5 filter-container">
+  <div class="fixed mt-16 w-1/3 max-w-[520px] p-5 filter-container">
     <div>
       <div class="flex justify-between mt-3 mb-4">
         <h2 class="font-catamaran text-2xl font-bold">Filtrowanie</h2>
@@ -10,7 +10,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1 font-catamaran font-medium">Ocena przejścia kursu</span>
+        <span class="text-sm mb-1.5 font-catamaran font-medium">Ocena przejścia kursu</span>
         <div class="flex flex-row-reverse w-fit">
           <div
             class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="grid mb-4">
-        <span class="text-sm mb-1 font-catamaran font-medium"
+        <span class="text-sm mb-1.5 font-catamaran font-medium"
           >Ocena aktywności i zaangażowania na kursie</span
         >
         <div class="flex flex-row-reverse w-fit">
@@ -69,7 +69,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1 font-catamaran font-medium">Ocena kodu w projekcie własnym</span>
+        <span class="text-sm mb-1.5 font-catamaran font-medium">Ocena kodu w projekcie własnym</span>
         <div class="flex flex-row-reverse w-fit">
           <div
             class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
@@ -95,7 +95,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1 font-catamaran font-medium">Ocena pracy w zespole Scrum</span>
+        <span class="text-sm mb-1.5 font-catamaran font-medium">Ocena pracy w zespole Scrum</span>
         <div class="flex flex-row-reverse w-fit">
           <div
             class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
@@ -123,7 +123,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1 font-catamaran font-medium">Preferowane miejsce pracy</span>
+        <span class="text-sm mb-1.5 font-catamaran font-medium">Preferowane miejsce pracy</span>
         <div class="flex w-fit">
           <div
             class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
@@ -144,7 +144,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1 font-catamaran font-medium">Oczekiwany typ kontraktu</span>
+        <span class="text-sm mb-1.5 font-catamaran font-medium">Oczekiwany typ kontraktu</span>
         <div class="flex w-fit">
           <div
             class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
@@ -165,7 +165,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-2 font-catamaran font-medium">Oczekiwane wynagrodzenie miesięcznie netto</span>
+        <span class="text-sm mb-1.5 font-catamaran font-medium">Oczekiwane wynagrodzenie miesięcznie netto</span>
         <div class="flex w-fit text-sm items-center">
           <span class="mr-2 font-catamaran mr-2 text-xs">Od</span>
           <input
@@ -185,7 +185,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-2 font-catamaran font-medium"
+        <span class="text-sm mb-1.5 font-catamaran font-medium"
           >Zgoda na odbycie bezpłatnych praktyk/stażu na początek</span
         >
         <div class="grid w-fit text-sm">
@@ -202,7 +202,7 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-2 font-catamaran font-medium"
+        <span class="text-sm mb-1.5 font-catamaran font-medium"
           >Ilość miesięcy doświadczenia komercyjnego kandydata w
           programowaniu</span
         >
