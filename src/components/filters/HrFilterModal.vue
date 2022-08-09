@@ -1,19 +1,19 @@
 <template>
   <div class="fixed inset-0 filter-bg transition-opacity"></div>
-  <div class="fixed mt-16 w-1/3 p-3 filter-container">
+  <div class="fixed mt-16 w-1/3 p-5 filter-container">
     <div>
       <div class="flex justify-between mt-3 mb-4">
-        <h2 class="font-bold">Filtrowanie</h2>
-        <button class="btn-clear" @click="resetFilter()">
-          Wyczyść Wszystko
+        <h2 class="font-catamaran text-2xl font-bold">Filtrowanie</h2>
+        <button class="hover:bg-[#2a3a44] bg-[#172A35] py-1 px-2.5 text-[#F7F7F7] font-catamaran font-medium text-sm" @click="resetFilter()">
+          Wyczyść wszystkie
         </button>
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1">Ocena przejścia kursu</span>
+        <span class="text-sm mb-1 font-catamaran font-medium">Ocena przejścia kursu</span>
         <div class="flex flex-row-reverse w-fit">
           <div
-            class="flex items-center dark-bgc m-1 p-1 text-xs cursor-pointer"
+            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
             v-for="index in 5"
             :class="{
               active: filters.courseCompletion.filter((v: number) => v === index)
@@ -31,7 +31,7 @@
                 active: filters.courseCompletion.filter((v: number) => v === index)
                   .length,
               }"
-              class="ml-1 text-red-500"
+              class="ml-1 text-red-500 transition ease-out duration-300"
               size="16"
               name="star"
             ></mdicon>
@@ -39,12 +39,12 @@
         </div>
       </div>
       <div class="grid mb-4">
-        <span class="text-sm mb-1"
-          >Ocena aktywności i zaangażowania w kursie</span
+        <span class="text-sm mb-1 font-catamaran font-medium"
+          >Ocena aktywności i zaangażowania na kursie</span
         >
         <div class="flex flex-row-reverse w-fit">
           <div
-            class="flex items-center dark-bgc m-1 p-1 text-xs cursor-pointer"
+            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
             v-for="index in 5"
             :class="{
               active: filters.courseEngagement.filter((v: number) => v === index).length,
@@ -69,10 +69,10 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1">Ocena kodu w projekcie własnym</span>
+        <span class="text-sm mb-1 font-catamaran font-medium">Ocena kodu w projekcie własnym</span>
         <div class="flex flex-row-reverse w-fit">
           <div
-            class="flex items-center dark-bgc m-1 p-1 text-xs cursor-pointer"
+            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
             v-for="index in 5"
             :class="{
               active: filters.projectDegree.filter((v: number) => v === index).length,
@@ -95,10 +95,10 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1">Ocena pracy w zespole Scrum</span>
+        <span class="text-sm mb-1 font-catamaran font-medium">Ocena pracy w zespole Scrum</span>
         <div class="flex flex-row-reverse w-fit">
           <div
-            class="flex items-center dark-bgc m-1 p-1 text-xs cursor-pointer"
+            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
             v-for="index in 5"
             :class="{
               active: filters.teamProjectDegree.filter((v: number) => v === index).length,
@@ -123,10 +123,10 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1">Preferowane Miejsce Pracy</span>
+        <span class="text-sm mb-1 font-catamaran font-medium">Preferowane miejsce pracy</span>
         <div class="flex w-fit">
           <div
-            class="flex items-center dark-bgc m-1 p-1 text-xs cursor-pointer"
+            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
             v-for="place in expectedTypeWork"
             :class="{
               active: filters.expectedTypeWork.filter((v: ExpectedTypeWorkEnum) => v === place.value)
@@ -144,10 +144,10 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-1">Oczekiwany typ kontraktu</span>
+        <span class="text-sm mb-1 font-catamaran font-medium">Oczekiwany typ kontraktu</span>
         <div class="flex w-fit">
           <div
-            class="flex items-center dark-bgc m-1 p-1 text-xs cursor-pointer"
+            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] font-catamaran transition ease-out duration-300"
             v-for="contract in expectedContractType"
             :class="{
               active: filters.expectedContractType.filter((v: ExpectedContractTypeEnum) => v === contract.value)
@@ -165,18 +165,18 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-2">Oczekiwane wynagrodzenie</span>
+        <span class="text-sm mb-2 font-catamaran font-medium">Oczekiwane wynagrodzenie miesięcznie netto</span>
         <div class="flex w-fit text-sm items-center">
-          <span class="mr-2">Od</span>
+          <span class="mr-2 font-catamaran mr-2 text-xs">Od</span>
           <input
-            class="dark-bgc p-1 mr-2"
+            class="mr-3 placeholder:text-xs placeholder:text-[#7E7E7E] font-catamaran p-1.5 w-1/4 bg-[#292A2B] h-7"
             type="number"
             placeholder="np. 1000 zł"
             v-model="filters.minSalary"
           />
-          <span class="mr-2">Do</span>
+          <span class="mr-2 font-catamaran mr-2 text-xs">Do</span>
           <input
-            class="dark-bgc p-1"
+            class="placeholder:text-xs placeholder:text-[#7E7E7E] font-catamaran p-1.5 w-1/4 bg-[#292A2B] h-7"
             type="number"
             placeholder="np. 10000 zł"
             v-model="filters.maxSalary"
@@ -185,11 +185,11 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-2"
+        <span class="text-sm mb-2 font-catamaran font-medium"
           >Zgoda na odbycie bezpłatnych praktyk/stażu na początek</span
         >
         <div class="grid w-fit text-sm">
-          <div v-for="option in chooseYesOrNo" class="flex items-center mb-1">
+          <div v-for="option in chooseYesOrNo" class="flex items-center mb-1 font-catamaran font-medium">
             <input
               class="mr-2"
               type="radio"
@@ -202,14 +202,14 @@
       </div>
 
       <div class="grid mb-4">
-        <span class="text-sm mb-2"
-          >Ilośc miesięcy doświadczenia komercyjnego kandydata w
+        <span class="text-sm mb-2 font-catamaran font-medium"
+          >Ilość miesięcy doświadczenia komercyjnego kandydata w
           programowaniu</span
         >
         <div class="grid text-sm">
           <div class="flex items-center mb-1">
             <input
-              class="mr-2 dark-bgc p-1 pl-1"
+              class="bg-[#292a2b] p-1 pl-2 placeholder:text-xs font-catamaran w-1/4"
               type="number"
               placeholder="0 miesięcy"
               v-model="filters.monthsOfCommercialExp"
@@ -219,8 +219,8 @@
       </div>
 
       <div class="flex justify-end text-sm mt-5">
-        <button class="mr-5 p-1" @click="emit('closeModal')">Anuluj</button>
-        <button class="add-button p-2" @click="emit('search-filters', filters)">
+        <button class="mr-5 p-1 font-catamaran text-base" @click="emit('closeModal')">Anuluj</button>
+        <button class="bg-[#E02735] px-2.5 py-1.5 text-base font-catamaran" @click="emit('search-filters', filters)">
           Pokaż wyniki
         </button>
       </div>
@@ -255,7 +255,7 @@ let filters = reactive<HrFilters>({
 
 const expectedTypeWork = reactive([
   {
-    text: 'Praca Zdalna',
+    text: 'Praca zdalna',
     value: ExpectedTypeWorkEnum['ONLY REMOTELY'],
   },
   { text: 'Praca w biurze', value: ExpectedTypeWorkEnum['AT LOCATION'] },
