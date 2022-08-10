@@ -29,7 +29,7 @@
           @click="hrFiltersModal = true"
         >
           <mdicon class="filter-button-icon" name="filter"></mdicon>
-          <span class="mr-2">Filtrowanie</span>
+          <span class="mr-2 leading-7 text-base">Filtrowanie</span>
         </button>
       </div>
     </div>
@@ -37,7 +37,7 @@
   <div class="dark-bgc mt-1 p-3">
     <div class="flex-table" v-for="user in userStore.userForHR">
       <div class="flex justify-between p-2">
-        <span class="flex items-end text-sm"
+        <span class="flex items-end text-sm text-lg"
           >{{ user.firstName }} {{ user.lastName[0] }}.</span
         >
         <div class="flex items-center">
