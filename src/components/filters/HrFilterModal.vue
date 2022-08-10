@@ -5,6 +5,7 @@
       <div class="flex justify-between mt-3 mb-4">
         <h2 class="text-2xl font-bold">Filtrowanie</h2>
         <button class="hover:bg-[#2a3a44] bg-[#172A35] py-1 px-2.5 text-[#F7F7F7] font-medium text-sm" @click="resetFilter()">
+
           Wyczyść wszystkie
         </button>
       </div>
