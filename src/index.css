@@ -1,48 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
-  .login-input {
-    @apply px-3 py-2  w-full  text-white;
-  }
+    .login-input {
+        @apply px-3 py-2 w-full text-white;
+    }
 
-  .td-row {
-    @apply py-1 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white;
-  }
-  .pagg-block {
-    @apply cursor-pointer py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
-  }
+    .td-row {
+        @apply py-1 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white;
+    }
+    .pagg-block {
+        @apply cursor-pointer py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+    }
 
-  .pagg-active {
-    @apply text-white font-bold;
-  }
+    .pagg-active {
+        @apply text-white font-bold;
+    }
 
-  .label-header {
-    @apply font-medium text-sm text-stone-100;
-  }
+    .label-header {
+        @apply font-medium text-sm text-stone-100;
+    }
 
-  .label-input {
-    @apply pl-1 mt-2 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50;
-  }
+    .label-input {
+        @apply pl-1 mt-2 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50;
+    }
 
-  .fc {
-    @apply flex flex-col;
-  }
+    .fc {
+        @apply flex flex-col;
+    }
 
-  .black-input {
-    @apply text-gray-700 w-64 p-2 mt-3 mr-4 ml-4;
-  }
+    .black-input {
+        @apply text-gray-700 w-64 p-2 mt-3 mr-4 ml-4;
+    }
 
-  .valid {
-    @apply animate-bounce-short font-bold text-red-600 m-0 p-0 text-xs text-left w-full ml-3;
-  }
+    .valid {
+        @apply animate-bounce-short font-bold text-red-600 m-0 p-0 text-xs text-left w-full ml-3;
+    }
 
-  .flex-center {
-    @apply flex flex-col justify-start items-center;
-  }
+    .flex-center {
+        @apply flex flex-col justify-start items-center;
+    }
 
-  .flex-form {
-    @apply flex flex-col justify-between items-start p-3 gap-1;
-  }
+    .flex-form {
+        @apply flex flex-col justify-between items-start p-3 gap-1;
+    }
 }
