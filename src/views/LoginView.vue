@@ -1,12 +1,12 @@
 <template>
   <div class="text-white flex justify-center items-center h-screen">
-    <div class="grid place-items-center w-1/5">
-      <img class="object-contain mb-5 w-32" src="../assets/logo.webp" />
+    <div class="grid place-items-center w-1/5 max-w-sm">
+      <img class="object-contain mb-5 w-32" src="../assets/logo.webp" alt="MegaK logo"/>
       <form class="w-full mb-3" v-on:keyup.enter="submitForm()">
         <div class="rounded mb-2">
           <div>
             <input
-              class="login-input b-input"
+              class="login-input mb-1"
               type="email"
               placeholder="E-mail"
               v-model="user.email"
@@ -19,7 +19,7 @@
 
         <div class="rounded">
           <input
-            class="login-input b-input"
+            class="login-input"
             type="password"
             placeholder="Hasło"
             v-model="user.password"
@@ -30,12 +30,12 @@
         </div>
       </form>
       <button class="text-right w-full text-sm mb-8">
-        <span>Zapomniałeś Hasła ? </span>
+        <span class="tracking-wider font-medium">Zapomniałeś hasła ? </span>
       </button>
       <div class="flex justify-between w-full items-center">
-        <span class="text-sm"
+        <span class="text-sm tracking-wide"
           >Nie masz konta?
-          <button class="underline">Zarejestruj się</button></span
+          <button class="underline font-bold tracking-wide">Zarejestruj się</button></span
         >
         <button
           class="p-2 bg-red-500 hover:bg-red-400"
@@ -82,8 +82,3 @@ async function submitForm() {
 }
 </script>
 
-<style>
-.b-input {
-  background-color: #292a2b;
-}
-</style>
