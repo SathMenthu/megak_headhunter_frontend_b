@@ -29,7 +29,7 @@
           @click="hrFiltersModal = true"
         >
           <mdicon class="filter-button-icon" name="filter"></mdicon>
-          <span class="mr-2">Filtrowanie</span>
+          <span class="mr-2 leading-7 text-base">Filtrowanie</span>
         </button>
       </div>
     </div>
@@ -39,8 +39,8 @@
       <div class="flex justify-between p-2">
         <div class="flex gap-20">
           <div class="grid w-fill">
-            <span class="text-sm header-in-table">Rezerwacja do</span>
-            <span class="font-bold text-sm tracking-widest">
+            <span class="text-sm header-in-table text-[#CFCFCF]">Rezerwacja do</span>
+            <span class="font-bold text-base tracking-widest">
               {{
                 user.reservationEndDate &&
                 formatDate(new Date(user.reservationEndDate))
@@ -50,7 +50,7 @@
           </div>
           <div class="flex items-center">
             <img :src="user?.avatar" class="w-16 h-16 py-2 px-2 rounded-full" />
-            <span class="flex items-end"
+            <span class="flex items-end text-lg"
               >{{ user.firstName }} {{ user.lastName }}</span
             >
           </div>

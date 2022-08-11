@@ -8,6 +8,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        catamaran: ['Catamaran', 'sans-serif']
       },
     },
   },
