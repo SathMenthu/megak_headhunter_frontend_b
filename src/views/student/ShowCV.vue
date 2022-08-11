@@ -75,7 +75,7 @@
                     <span class="font-bold"
                     >{{ user.courseCompletion || '- ' }}
                     </span>
-                    <span class="rating-range mr-2 ml-2"> /5</span>
+                    <span class="text-[#9E9E9E] mr-2 ml-2"> /5</span>
 
                     <mdicon
                         v-for="index in user.courseCompletion"
@@ -100,7 +100,7 @@
                     <span class="font-bold"
                     >{{ user.courseEngagement || '- ' }}
                     </span>
-                    <span class="rating-range mr-2 ml-2"> /5</span>
+                    <span class="text-[#9E9E9E] mr-2 ml-2"> /5</span>
 
                     <mdicon
                         v-for="index in user.courseEngagement"
@@ -125,7 +125,7 @@
                     <span class="font-bold"
                     >{{ user.projectDegree || '- ' }}
                     </span>
-                    <span class="rating-range mr-2 ml-2"> /5</span>
+                    <span class="text-[#9E9E9E] mr-2 ml-2"> /5</span>
 
                     <mdicon
                         v-for="index in user.projectDegree"
@@ -150,7 +150,7 @@
                     <span class="font-bold"
                     >{{ user.teamProjectDegree || '- ' }}
                     </span>
-                    <span class="rating-range mr-2 ml-2"> /5</span>
+                    <span class="text-[#9E9E9E] mr-2 ml-2"> /5</span>
 
                     <mdicon
                         v-for="index in user.teamProjectDegree"

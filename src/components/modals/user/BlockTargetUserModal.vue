@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed inset-0 filter-bg transition-opacity"></div>
-  <div class="fixed dark-bgc filter-container-center-wc">
+  <div class="fixed inset-0 bg-[#1e1e1f] opacity-80 transition-opacity"></div>
+  <div class="fixed bg-[#292a2b] filter-container-center-wc">
     <div class="shadow-lg flex flex-col text-sm">
       <div class="flex items-center justify-center p-4">
         <h5 class="text-xl">Blokowanie Użytkownika</h5>
@@ -10,7 +10,7 @@
           <span class="mr-5">Email:</span>
           <input
             v-model="user.email"
-            class="dark-bgc2 w-64 p-2 mt-3 mr-6"
+            class="bg-[#1e1e1f] w-64 p-2 mt-3 mr-6"
             disabled
           />
         </label>
@@ -18,7 +18,7 @@
           <span class="mr-5">Imię:</span>
           <input
             v-model="user.firstName"
-            class="dark-bgc2 w-64 p-2 mt-3 mr-4"
+            class="bg-[#1e1e1f] w-64 p-2 mt-3 mr-4"
             disabled
           />
         </label>
@@ -26,7 +26,7 @@
           <span class="mr-5">Nazwisko:</span>
           <input
             v-model="user.lastName"
-            class="dark-bgc2 w-64 p-2 mt-3 mr-4"
+            class="bg-[#1e1e1f] w-64 p-2 mt-3 mr-4"
             disabled
           />
         </label>

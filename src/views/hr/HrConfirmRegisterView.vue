@@ -1,6 +1,6 @@
 <template>
-  <div class="dark-bgc">
-    <div class="dark-bgc p-5 grid mt-3">
+  <div class="bg-[#292a2b]">
+    <div class="bg-[#292a2b] p-5 grid mt-3">
       <span class="font-bold text-center text-lg"
         >Potwierdzenie Rejestracji</span
       >
@@ -23,7 +23,7 @@
           <label for="password"> Hasło </label>
           <input
             id="password"
-            class="dark-bgc2 px-1 py-1"
+            class="edit-data-input"
             v-model="editedUser.password"
             placeholder="Hasło"
             type="password"
@@ -36,7 +36,7 @@
           <label for="confirmPassword" class="">Potwierdź Hasło </label>
           <input
             id="confirmPassword"
-            class="dark-bgc2 px-1 py-1"
+            class="edit-data-input"
             v-model="editedUser.confirmPassword"
             placeholder="Potwierdź Hasło"
             type="password"
@@ -49,7 +49,7 @@
           <label for="name" class=""> Imię </label>
           <input
             id="firstName"
-            class="dark-bgc2 px-1 py-1"
+            class="edit-data-input"
             v-model="editedUser.firstName"
             placeholder="Imię"
             type="text"
@@ -62,7 +62,7 @@
           <label for="lastName"> Nazwisko </label>
           <input
             id="lastName"
-            class="dark-bgc2 px-1 py-1"
+            class="edit-data-input"
             v-model="editedUser.lastName"
             placeholder="Nazwisko"
             type="text"
@@ -76,7 +76,7 @@
           <label for="company"> Nazwa Firmy </label>
           <input
             id="company"
-            class="dark-bgc2 px-1 py-1"
+            class="edit-data-input"
             v-model="editedUser.company"
             placeholder="Firma"
             type="text"

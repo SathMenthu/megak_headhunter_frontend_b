@@ -1,19 +1,19 @@
 <template>
-  <div class="dark-bgc mt-1">
+  <div class="bg-[#292a2b] mt-1">
     <div class="p-3 flex justify-between w-full">
       <div class="relative rounded w-1/4">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-          <mdicon class="filter-input-icon-color" name="magnify" />
+          <mdicon class="text-[#4D4D4D]" name="magnify" />
         </span>
         <button class="absolute inset-y-0 right-1 flex items-center pl-2">
           <mdicon
-            class="filter-input-icon-color hover:text-gray-300"
+            class="text-[#4D4D4D] hover:text-gray-300"
             name="close"
           />
         </button>
         <div>
           <input
-            class="dark-bgc2 filter-input-icon-color pl-10 px-3 py-2 focus:outline-none focus:shadow-outline w-full"
+            class="search-input"
             type="text"
             autocomplete="new-search"
             placeholder="Szukaj"
@@ -28,13 +28,13 @@
           class="flex justify-center filter-button text-sm hover:bg-gray-900"
           @click="hrFiltersModal = true"
         >
-          <mdicon class="filter-button-icon" name="filter"></mdicon>
+          <mdicon class="text-[#4d4d4d]" name="filter"></mdicon>
           <span class="mr-2 leading-7 text-base">Filtrowanie</span>
         </button>
       </div>
     </div>
   </div>
-  <div class="dark-bgc mt-1 p-3">
+  <div class="bg-[#292a2b] mt-1 p-3">
     <div class="flex-table" v-for="user in userStore.userForTargetHR">
       <div class="flex justify-between p-2">
         <div class="flex gap-20">
@@ -71,9 +71,9 @@
           </button>
           <mdicon
             @click="targerUser = targerUser === user ? null : user"
-            class="ml-3 cursor-pointer filter-input-icon-color"
+            class="ml-3 cursor-pointer text-[#666666]"
             size="32px"
-            :name="targerUser === user ? 'chevron-down' : 'chevron-up'"
+            :name="targerUser === user ? 'chevron-up' : 'chevron-down'"
           ></mdicon>
         </div>
       </div>
@@ -136,7 +136,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue';
-import { FilteredUser, HrFilters } from '../../types/index';
+import { FilteredUser, HrFilters } from '../../types';
 import { useGlobalStore } from '../../stores/global';
 import { useUserStore } from '../../stores/user';
 import { StudentStatus } from '../../types/enums/student.status.enum';
@@ -236,8 +236,8 @@ function padTo2Digits(num: number) {
 
 function formatDate(date: Date) {
   return [
-    padTo2Digits(date.getMonth() + 1),
     padTo2Digits(date.getDate()),
+    padTo2Digits(date.getMonth() + 1),
     date.getFullYear(),
   ].join('.');
 }
@@ -259,25 +259,9 @@ async function UnreserveStudent(user: FilteredUser) {
 </script>
 
 <style>
-.filter-input-icon-color {
-  color: #666666;
-}
-
-.expanded-item {
-  background: #2323249a;
-}
-
 .header-in-table {
   color: #b8b5b5;
   font-size: 10px;
-}
-
-.item-in-hr-table {
-  font-size: 11px;
-}
-
-.rating-range {
-  color: #9e9e9e;
 }
 
 .flex-table {

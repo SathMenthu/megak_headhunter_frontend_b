@@ -1,9 +1,9 @@
 <template>
-  <div class="dark-bgc p-2 grid gap-5 mt-1">
+  <div class="bg-[#292a2b] p-2 grid gap-5 mt-1">
     <AddUserForm :role="role" :rules="rules" />
   </div>
 
-  <div class="dark-bgc p-2 mt-1 flex flex-col gap-5">
+  <div class="bg-[#292a2b] p-2 mt-1 flex flex-col gap-5">
     <span class="p-1 font-bold">Import Użytkowników</span>
     <div class="mb-1 pl-6 flex flex-col w-1/3">
       <input ref="file" class="p-3 border mb-6" type="file" />

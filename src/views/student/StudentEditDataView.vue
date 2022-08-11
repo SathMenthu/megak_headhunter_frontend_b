@@ -1,6 +1,6 @@
 <template>
-  <div class="dark-bgc">
-    <div class="dark-bgc p-2 grid mt-2">
+  <div class="bg-[#292a2b]">
+    <div class="bg-[#292a2b] p-2 grid mt-2">
       <div class="p-5 mb-10 flex items-center gap-20">
         <span class="font-bold text-4xl">{{
           type === 'register' ? 'Rejestracja' : 'Twoje Dane'
@@ -38,7 +38,7 @@
             <label for="password"> Hasło </label>
             <input
               id="password"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.password"
               placeholder="Hasło"
               type="password"
@@ -51,7 +51,7 @@
             <label for="confirmPassword" class="">Potwierdź Hasło </label>
             <input
               id="confirmPassword"
-              class="dark-bgc2 px-1 py-1"
+              class="student-edit-input"
               v-model="editedUser.confirmPassword"
               placeholder="Potwierdź Hasło"
               type="password"
@@ -64,7 +64,7 @@
             <label for="name"> Imię </label>
             <input
               id="firstName"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.firstName"
               placeholder="Imię"
               type="text"
@@ -80,7 +80,7 @@
             <label for="lastName"> Nazwisko </label>
             <input
               id="lastName"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.lastName"
               placeholder="Nazwisko"
               type="text"
@@ -96,7 +96,7 @@
             <label for="phoneNumber"> Numer Telefonu </label>
             <input
               id="phoneNumber"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.phoneNumber"
               placeholder="Numer Telefonu"
               type="tel"
@@ -111,7 +111,7 @@
             <label for="targetWorkCity"> Preferowane Miasto </label>
             <input
               id="targetWorkCity"
-              class="dark-bgc2 px-1 py-1"
+              class="bg-[#1e1e1f] px-1 py-1"
               v-model="editedUser.targetWorkCity"
               placeholder="Miasto"
               type="text"
@@ -119,7 +119,7 @@
           </div>
           <div class="flex-form">
             <label for="expectedTypeWork"> Preferowany tryb pracy </label>
-            <select v-model="editedUser.expectedTypeWork" class="dark-bgc2 p-1">
+            <select v-model="editedUser.expectedTypeWork" class="bg-[#1e1e1f] p-1">
               <option :value="option.value" v-for="option in ExpectedTypeWork">
                 {{ option.text }}
               </option>
@@ -129,7 +129,7 @@
             <label for="expectedContractType"> Preferowany rodzaj umowy </label>
             <select
               v-model="editedUser.expectedContractType"
-              class="dark-bgc2 p-1"
+              class="bg-[#1e1e1f] p-1"
             >
               <option
                 :value="option.value"
@@ -143,7 +143,7 @@
             <label for="expectedSalary"> Wynagrodzenie </label>
             <input
               id="expectedSalary"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.expectedSalary"
               placeholder="Kwota Netto"
               type="number"
@@ -155,7 +155,7 @@
             </label>
             <input
               id="monthsOfCommercialExp"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.monthsOfCommercialExp"
               placeholder="Ilość Miesięcy"
               type="number"
@@ -167,7 +167,7 @@
             </label>
             <select
               v-model="editedUser.canTakeApprenticeship"
-              class="dark-bgc2 p-1"
+              class="bg-[#1e1e1f] p-1"
             >
               <option :value="option.value" v-for="option in confirm">
                 {{ option.text }}
@@ -181,7 +181,7 @@
             <label for="bio"> Bio </label>
             <textarea
               id="bio"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.bio"
               placeholder="Bio"
             ></textarea>
@@ -190,7 +190,7 @@
             <label for="education"> Wykształcenie </label>
             <textarea
               id="education"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.education"
               placeholder="Wykształcenie"
             ></textarea>
@@ -199,7 +199,7 @@
             <label for="workExperience"> Doświadczenie Zawodowe </label>
             <textarea
               id="workExperience"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.workExperience"
               placeholder="Doświadczenie Zawodowe"
             ></textarea>
@@ -210,7 +210,7 @@
             </label>
             <textarea
               id="courses"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.courses"
               placeholder="Kursy i certyfikaty"
             ></textarea>
@@ -277,7 +277,7 @@
             <label for="githubUsername"> Nazwa na GitHub </label>
             <input
               id="githubUsername"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.githubUsername"
               placeholder="Nick"
               type="text"
@@ -288,7 +288,7 @@
             <label for="portfolioUrls"> Linki do portfolio </label>
             <textarea
               id="portfolioUrls"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.portfolioUrls"
               placeholder="Linki oddzielone ','"
             ></textarea>
@@ -297,7 +297,7 @@
             <label for="projectUrls"> Linki do projektów </label>
             <textarea
               id="projectUrls"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.projectUrls"
               placeholder="Linki oddzielone ','"
             >
@@ -307,7 +307,7 @@
             <label for="bonusProjectUrls"> URL-e do GitHuba. </label>
             <textarea
               id="bonusProjectUrls"
-              class="dark-bgc2 px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.bonusProjectUrls"
               placeholder="Linki oddzielone ','"
             ></textarea>
