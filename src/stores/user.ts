@@ -118,19 +118,16 @@ export const useUserStore = defineStore('userStore', {
 
       try {
         const {
-          data: { isSuccess },
+          data: { isSuccess, message },
         }: { data: FindUserResponse } = await axios.post(`api/user/`, user);
 
         if (isSuccess) {
-          snackbarMessage = 'Pomyślnie dodano użytkownika.';
+          snackbarMessage = message;
           snackbarType = 'success';
-        } else {
-          snackbarMessage = 'Adres Email jest zajęty!';
-          snackbarType = 'error';
-        }
+        } else throw new Error(`${message}`);
         return isSuccess;
       } catch (error) {
-        snackbarMessage = 'Wystąpił błąd podczas dodawania użytkownika.';
+        snackbarMessage = (error as Error).message;
         snackbarType = 'error';
       } finally {
         snackbarStore.message = snackbarMessage;
@@ -238,19 +235,19 @@ export const useUserStore = defineStore('userStore', {
       let snackbarType = '';
       try {
         const {
-          data: { isSuccess },
+          data: { isSuccess, message },
         }: { data: FindUserResponse } = await axios.patch(
           `api/user/confirm-register/${user.activationLink}`,
           user,
         );
 
         if (isSuccess) {
-          snackbarMessage = 'Pomyślnie potwierdzono rejestracje konta.';
+          snackbarMessage = message;
           snackbarType = 'success';
           router.push('login');
-        } else throw new Error();
+        } else throw new Error(`${message}`);
       } catch (error) {
-        snackbarMessage = 'Wystąpił błąd podczas procesu potwierdzania konta';
+        snackbarMessage = (error as Error).message;
         snackbarType = 'error';
       } finally {
         snackbarStore.message = snackbarMessage;
@@ -286,19 +283,20 @@ export const useUserStore = defineStore('userStore', {
       let snackbarMessage = '';
       let snackbarType = '';
       try {
+        debugger
         const {
-          data: { isSuccess },
+          data: { isSuccess, message },
         }: { data: FindUserResponse } = await axios.patch(
           `api/user/${user.id}`,
           user,
         );
 
         if (isSuccess) {
-          snackbarMessage = 'Pomyślnie zaktualizowano konto.';
+          snackbarMessage = message;
           snackbarType = 'success';
-        } else throw new Error();
+        } else throw new Error(`${message}`);
       } catch (error) {
-        snackbarMessage = 'Wystąpił błąd podczas aktualizacji konta.';
+        snackbarMessage = (error as Error).message;
         snackbarType = 'error';
       } finally {
         snackbarStore.message = snackbarMessage;
