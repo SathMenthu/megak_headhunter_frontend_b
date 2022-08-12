@@ -22,7 +22,7 @@
             <input
               disabled
               id="email"
-              class="px-1 py-1"
+              class="edit-data-input"
               v-model="editedUser.email"
               placeholder="Email"
               type="email"
@@ -51,7 +51,7 @@
             <label for="confirmPassword" class="">Potwierdź Hasło </label>
             <input
               id="confirmPassword"
-              class="student-edit-input"
+              class="edit-data-input"
               v-model="editedUser.confirmPassword"
               placeholder="Potwierdź Hasło"
               type="password"
