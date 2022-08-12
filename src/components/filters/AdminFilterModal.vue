@@ -51,7 +51,7 @@
 
       <div class="flex justify-end text-sm mt-5">
         <button class="mr-5 p-1" @click="emit('closeModal')">Anuluj</button>
-        <button class="add-button p-2" @click="emit('search-filters', filters)">
+        <button class="add-button" @click="emit('search-filters', filters)">
           Pokaż wyniki
         </button>
       </div>

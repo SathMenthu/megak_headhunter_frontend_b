@@ -35,7 +35,7 @@
     </div>
   </div>
   <div class="bg-[#292a2b] mt-1 p-3">
-    <div class="flex-table" v-for="user in userStore.userForTargetHR">
+    <div class="border-b-[12px] border-[#222324]" v-for="user in userStore.userForTargetHR">
       <div class="flex justify-between p-2">
         <div class="flex gap-20">
           <div class="grid w-fill">
@@ -57,16 +57,16 @@
         </div>
 
         <div class="flex items-center">
-          <button class="add-button px-2 py-1.5 mr-5" @click="showUserCV(user)">
+          <button class="add-button mr-5" @click="showUserCV(user)">
             Pokaż CV
           </button>
           <button
-            class="add-button px-2 py-1.5 mr-5"
+            class="add-button mr-5"
             @click="UnreserveStudent(user)"
           >
             Brak Zainteresowania
           </button>
-          <button class="add-button px-2 py-1.5" @click="HireStudent(user)">
+          <button class="add-button" @click="HireStudent(user)">
             Zatrudniony
           </button>
           <mdicon
@@ -258,13 +258,3 @@ async function UnreserveStudent(user: FilteredUser) {
 }
 </script>
 
-<style>
-.header-in-table {
-  color: #b8b5b5;
-  font-size: 10px;
-}
-
-.flex-table {
-  border-bottom: 12px #222324 solid;
-}
-</style>

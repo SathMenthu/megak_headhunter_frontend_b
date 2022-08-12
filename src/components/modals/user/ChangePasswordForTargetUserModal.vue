@@ -94,10 +94,3 @@ async function submitForm() {
   }
 }
 </script>
-
-<style>
-.add-button {
-  background-color: #e02735;
-  padding: 5px;
-}
-</style>

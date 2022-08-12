@@ -35,14 +35,14 @@
     </div>
   </div>
   <div class="bg-[#292a2b] mt-1 p-3">
-    <div class="flex-table" v-for="user in userStore.userForHR">
+    <div class="border-b-[12px] border-[#222324]" v-for="user in userStore.userForHR">
       <div class="flex justify-between p-2">
         <span class="flex items-end text-sm text-lg"
           >{{ user.firstName }} {{ user.lastName[0] }}.</span
         >
         <div class="flex items-center">
           <button
-            class="add-button px-2 py-1.5"
+            class="add-button"
             @click="reserveTargetUser(user)"
           >
             Zarezerwuj rozmowę
@@ -207,13 +207,3 @@ async function reserveTargetUser(user: FilteredUser) {
 }
 </script>
 
-<style>
-.header-in-table {
-  color: #b8b5b5;
-  font-size: 10px;
-}
-
-.flex-table {
-  border-bottom: 12px #222324 solid;
-}
-</style>

@@ -303,20 +303,3 @@ const debounceDataFromTable = () => {
   }, 500);
 };
 </script>
-
-<style>
-.filter-button {
-  background-color: #1e1e1f;
-  padding: 7px 3px;
-}
-
-.arrow-pag {
-  background-color: #666666;
-  color: #333333;
-}
-
-.arrow-pag-active {
-  background-color: #cfcfcf;
-  color: #333333;
-}
-</style>

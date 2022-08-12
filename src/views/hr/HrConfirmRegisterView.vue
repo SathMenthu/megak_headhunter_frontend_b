@@ -85,7 +85,7 @@
       </form>
     </div>
     <div class="flex-center">
-      <button @click.prevent="submitForm()" class="add-button p-4 mt-4 mb-10">
+      <button @click.prevent="submitForm()" class="add-button mt-4 mb-10">
         Potwierdź Rejestracje
       </button>
     </div>

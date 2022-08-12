@@ -10,7 +10,7 @@
     <div class="ml-5 mr-16">
       <div class="grid grid-cols-12 gap-4 pt-7">
         <div
-            class="h-fit card flex flex-col col-span-2 justify-center items-center"
+            class="h-fit bg-[#292a2b] flex flex-col col-span-2 justify-center items-center"
         >
           <img
               :src="user?.avatar"
@@ -62,7 +62,7 @@
         </div>
         <div class="col-span-10 mb-8">
           <div>
-            <div class="card max-h-14 flex">
+            <div class="bg-[#292a2b] max-h-14 flex">
               <span class="text-xl font-bold h-full p-4">Oceny</span>
             </div>
             <div class="flex">
@@ -172,7 +172,7 @@
           </div>
 
           <div>
-            <div class="card max-h-14 flex">
+            <div class="bg-[#292a2b] max-h-14 flex">
               <span class="text-xl font-bold h-full p-4"
               >Oczekiwanie w stosunku do zatrudnienia</span
               >
@@ -244,7 +244,7 @@
             </div>
           </div>
           <div>
-            <div class="card max-h-14 flex">
+            <div class="bg-[#292a2b] max-h-14 flex">
               <span class="text-xl font-bold h-full p-4">Edukacja</span>
             </div>
             <div class="flex content-cv">
@@ -256,7 +256,7 @@
             </div>
           </div>
           <div>
-            <div class="card max-h-14 flex">
+            <div class="bg-[#292a2b] max-h-14 flex">
               <span class="text-xl font-bold h-full p-4">Kursy</span>
             </div>
             <div class="flex content-cv">
@@ -268,7 +268,7 @@
             </div>
           </div>
           <div>
-            <div class="card max-h-14 flex">
+            <div class="bg-[#292a2b] max-h-14 flex">
               <span class="text-xl font-bold h-full p-4"
               >Doświadczenie zawodowe</span
               >
@@ -282,7 +282,7 @@
             </div>
           </div>
           <div>
-            <div class="card max-h-14 flex">
+            <div class="bg-[#292a2b] max-h-14 flex">
               <span class="text-xl font-bold h-full p-4">Portfolio</span>
             </div>
             <div class="flex content-cv">
@@ -302,7 +302,7 @@
             </div>
           </div>
           <div>
-            <div class="card max-h-14 flex">
+            <div class="bg-[#292a2b] max-h-14 flex">
               <span class="text-xl font-bold h-full p-4"
               >Projekt w zespole Scrumowym</span
               >
@@ -323,7 +323,7 @@
               </div>
             </div>
             <div>
-              <div class="card max-h-14 flex">
+              <div class="bg-[#292a2b] max-h-14 flex">
                 <span class="text-xl font-bold h-full p-4"
                 >Projekt na zaliczenie</span
                 >
@@ -378,9 +378,3 @@ async function UnreserveStudent() {
     router.push('hr-dashboard');
 }
 </script>
-
-<style>
-.card {
-  background-color: #292a2b;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="bg-[#1e1e1f]">
     <div class="w-full h-14 text-white flex justify-between">
       <div class="w-full ml-64">
         <button @click="router.push('login')">
@@ -24,7 +24,7 @@
 
               <div
                 v-if="dropMenu"
-                class="w-52 absolute left-0 flex flex-col items-start text-sm drop-menu"
+                class="w-52 absolute left-0 flex flex-col items-start text-sm bg-[#1e1e1f]"
               >
                 <button
                   class="mt-2 p-1 pl-3 hover:bg-gray-700 w-full text-left"
@@ -61,11 +61,3 @@ const dropMenu = ref(false);
 const authStore = useAuthStore();
 </script>
 
-<style>
-nav {
-  background-color: #1e1e1f;
-}
-.drop-menu {
-  background-color: #1e1e1f;
-}
-</style>
