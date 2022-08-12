@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed inset-0 filter-bg transition-opacity"></div>
-  <div class="fixed dark-bgc filter-container-center-wc">
+  <div class="fixed inset-0 bg-[#1e1e1f] opacity-80 transition-opacity"></div>
+  <div class="fixed bg-[#292a2b] filter-container-center-wc">
     <div class="shadow-lg flex flex-col text-sm">
       <div class="flex items-center justify-center p-4">
         <h5 class="text-xl">Zamykania konta na platformie</h5>
@@ -34,13 +34,3 @@
 <script setup lang="ts">
 defineEmits(['confirmAndCloseDialog', 'closeDialog']);
 </script>
-
-<style>
-.add-button {
-  background-color: #e02735;
-  padding: 5px;
-}
-.add-button:hover {
-  background-color: #e4404e;
-}
-</style>

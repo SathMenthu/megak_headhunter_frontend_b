@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed inset-0 filter-bg transition-opacity"></div>
-  <div class="fixed dark-bgc filter-container-center-wc">
+  <div class="fixed inset-0 bg-[#1e1e1f] opacity-80 transition-opacity"></div>
+  <div class="fixed bg-[#292a2b] filter-container-center-wc">
     <div class="flex flex-col text-sm">
       <div class="flex items-center justify-center p-4">
         <h5 class="text-xl">Edycja Hasła Użytkownika</h5>
@@ -13,7 +13,7 @@
               autocomplete="new-password"
               type="password"
               v-model="password"
-              class="dark-bgc2 w-64 p-2 mt-3 mr-6"
+              class="bg-[#1e1e1f] w-64 p-2 mt-3 mr-6"
               placeholder="Hasło"
             />
             <span v-if="v$.password.$error" class="ml-5 valid mt-2">{{
@@ -30,7 +30,7 @@
               type="password"
               placeholder="Potwierdź Hasło"
               v-model="confirmPassword"
-              class="dark-bgc2 w-64 p-2 mt-3 mr-4"
+              class="bg-[#1e1e1f] w-64 p-2 mt-3 mr-4"
             />
             <span v-if="v$.confirmPassword.$error" class="valid mt-2">{{
               v$.confirmPassword.$errors[0].$message
@@ -94,10 +94,3 @@ async function submitForm() {
   }
 }
 </script>
-
-<style>
-.add-button {
-  background-color: #e02735;
-  padding: 5px;
-}
-</style>

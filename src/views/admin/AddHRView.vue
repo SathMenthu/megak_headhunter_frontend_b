@@ -1,5 +1,5 @@
 <template>
-  <div class="dark-bgc p-2 grid gap-5 mt-1">
+  <div class="bg-[#292a2b] p-2 grid gap-5 mt-1">
     <AddUserForm :role="role" :rules="rules" />
   </div>
 </template>

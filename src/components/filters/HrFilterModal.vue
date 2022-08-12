@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 filter-bg transition-opacity"></div>
+  <div class="fixed inset-0 bg-[#1e1e1f] opacity-80 transition-opacity"></div>
   <div class="fixed mt-16 w-1/3 max-w-[520px] p-5 filter-container">
     <div>
       <div class="flex justify-between mt-3 mb-4">
@@ -14,7 +14,7 @@
         <span class="text-sm mb-1.5 font-medium">Ocena przejścia kursu</span>
         <div class="flex flex-row-reverse w-fit">
           <div
-            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] transition ease-out duration-300"
+            class="rating-stars"
             v-for="index in 5"
             :class="{
               active: filters.courseCompletion.filter((v: number) => v === index)
@@ -45,7 +45,7 @@
         >
         <div class="flex flex-row-reverse w-fit">
           <div
-            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] transition ease-out duration-300"
+            class="rating-stars"
             v-for="index in 5"
             :class="{
               active: filters.courseEngagement.filter((v: number) => v === index).length,
@@ -73,7 +73,7 @@
         <span class="text-sm mb-1.5 font-medium">Ocena kodu w projekcie własnym</span>
         <div class="flex flex-row-reverse w-fit">
           <div
-            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] transition ease-out duration-300"
+            class="rating-stars"
             v-for="index in 5"
             :class="{
               active: filters.projectDegree.filter((v: number) => v === index).length,
@@ -99,7 +99,7 @@
         <span class="text-sm mb-1.5 font-medium">Ocena pracy w zespole Scrum</span>
         <div class="flex flex-row-reverse w-fit">
           <div
-            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] transition ease-out duration-300"
+            class="rating-stars"
             v-for="index in 5"
             :class="{
               active: filters.teamProjectDegree.filter((v: number) => v === index).length,
@@ -127,7 +127,7 @@
         <span class="text-sm mb-1.5 font-medium">Preferowane miejsce pracy</span>
         <div class="flex w-fit">
           <div
-            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] transition ease-out duration-300"
+            class="rating-stars"
             v-for="place in expectedTypeWork"
             :class="{
               active: filters.expectedTypeWork.filter((v: ExpectedTypeWorkEnum) => v === place.value)
@@ -148,7 +148,7 @@
         <span class="text-sm mb-1.5 font-medium">Oczekiwany typ kontraktu</span>
         <div class="flex w-fit">
           <div
-            class="flex items-center mr-2 py-1.5 px-2 text-xs cursor-pointer bg-[#292a2b] transition ease-out duration-300"
+            class="rating-stars"
             v-for="contract in expectedContractType"
             :class="{
               active: filters.expectedContractType.filter((v: ExpectedContractTypeEnum) => v === contract.value)

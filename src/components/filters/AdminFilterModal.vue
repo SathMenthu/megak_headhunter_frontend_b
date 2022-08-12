@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 filter-bg transition-opacity"></div>
+  <div class="fixed inset-0 bg-[#1e1e1f] opacity-80 transition-opacity"></div>
   <div class="fixed w-1/4 p-3 filter-container">
     <div>
       <div class="flex justify-between mb-4">
@@ -11,7 +11,7 @@
 
       <div class="grid place-items-start gap-1 text-sm">
         <span>Rola</span>
-        <select v-model="filters.permission" class="dark-bgc p-1">
+        <select v-model="filters.permission" class="bg-[#292a2b] p-1">
           <option :value="role" v-for="role in roles">
             {{ role.text }}
           </option>
@@ -35,14 +35,14 @@
         </div>
 
         <span>Kierunek Sortowania</span>
-        <select v-model="filters.sortDirection" class="dark-bgc p-1">
+        <select v-model="filters.sortDirection" class="bg-[#292a2b] p-1">
           <option :value="option.value" v-for="option in sortDirectionOptions">
             {{ option.text }}
           </option>
         </select>
 
         <span>Sortowanie po</span>
-        <select v-model="filters.sortTarget" class="dark-bgc p-1">
+        <select v-model="filters.sortTarget" class="bg-[#292a2b] p-1">
           <option :value="option.value" v-for="option in sortTargets">
             {{ option.text }}
           </option>
@@ -51,7 +51,7 @@
 
       <div class="flex justify-end text-sm mt-5">
         <button class="mr-5 p-1" @click="emit('closeModal')">Anuluj</button>
-        <button class="add-button p-2" @click="emit('search-filters', filters)">
+        <button class="add-button" @click="emit('search-filters', filters)">
           Pokaż wyniki
         </button>
       </div>

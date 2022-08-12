@@ -1,9 +1,9 @@
 <template>
-  <div class="flex-center mt-1 dark-bgc">
+  <div class="flex-center mt-1 bg-[#292a2b]">
     <div class="p-3 flex justify-between w-full">
       <div class="relative rounded w-1/4">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-          <mdicon class="filter-input-icon-color" name="magnify" />
+          <mdicon class="text-[#666666]" name="magnify" />
         </span>
         <button
           v-if="search.length > 0"
@@ -14,13 +14,13 @@
           "
         >
           <mdicon
-            class="filter-input-icon-color hover:text-gray-300"
+            class="text-[#666666] hover:text-gray-300"
             name="close"
           />
         </button>
         <div>
           <input
-            class="dark-bgc2 filter-input-icon-color pl-10 px-3 py-2 focus:outline-none focus:shadow-outline w-full"
+            class="bg-[#1e1e1f] placeholder:text-[#666666] pl-10 px-3 py-2 focus:outline-none focus:shadow-outline w-full"
             type="text"
             autocomplete="new-search"
             placeholder="Szukaj"
@@ -35,15 +35,15 @@
           class="flex justify-center filter-button text-sm hover:bg-gray-900"
           @click="adminFiltersModal = true"
         >
-          <mdicon class="filter-button-icon" name="filter"></mdicon>
-          <span class="mr-2">Filtrowanie</span>
+          <mdicon class="text-[#4d4d4d]" name="filter"></mdicon>
+          <span class="mr-2 leading-7 text-base">Filtrowanie</span>
         </button>
       </div>
     </div>
   </div>
-  <div class="flex mt-4 dark-bgc">
+  <div class="flex mt-4 bg-[#292a2b]">
     <table class="m-3 w-full table-auto text-sm text-left">
-      <thead class="text-xs dark-bgc2">
+      <thead class="text-xs bg-[#1e1e1f]">
         <tr>
           <th class="py-3 px-3" v-for="header in headers">
             <div class="flex justify-between items-center">
@@ -53,7 +53,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="table-down-border" v-for="user in userStore.userList">
+        <tr class="border-b-4 border-[#1e1e1f] " v-for="user in userStore.userList">
           <td class="td-row">
             {{ user.email }}
           </td>
@@ -187,7 +187,7 @@ import {
   AdminFilters,
   UserFilters,
   FilteredUser,
-} from '../../types/index';
+} from '../../types';
 
 const userStore = useUserStore();
 const globalStore = useGlobalStore();
@@ -303,31 +303,3 @@ const debounceDataFromTable = () => {
   }, 500);
 };
 </script>
-
-<style>
-.filter-button {
-  background-color: #1e1e1f;
-  padding: 7px 3px;
-}
-
-.filter-button-icon {
-  color: #4d4d4d;
-}
-
-.filter-input-icon-color {
-  color: #666666;
-}
-.filter-input-icon-color::placeholder {
-  color: #666666;
-}
-
-.arrow-pag {
-  background-color: #666666;
-  color: #333333;
-}
-
-.arrow-pag-active {
-  background-color: #cfcfcf;
-  color: #333333;
-}
-</style>

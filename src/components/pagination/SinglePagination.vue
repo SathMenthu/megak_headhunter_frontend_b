@@ -72,5 +72,3 @@
 defineProps(['currentPage', 'lastPage', 'total']);
 defineEmits(['update:pageValue']);
 </script>
-
-<style></style>

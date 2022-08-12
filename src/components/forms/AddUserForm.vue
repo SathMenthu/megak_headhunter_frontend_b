@@ -1,11 +1,11 @@
 <template>
-  <div class="dark-bgc p-2 grid gap-5 mt-3">
+  <div class="bg-[#292a2b] p-2 grid gap-5 mt-3">
     <span class="p-1 font-bold">Dodawanie Użytkownika</span>
     <form class="flex flex-col gap-1 pl-6">
       <label for="email" class=""> Email </label>
       <input
         id="email"
-        class="dark-bgc2 px-1 py-1 w-1/3"
+        class="add-user-input"
         v-model="user.email"
         placeholder="Email"
         type="email"
@@ -16,7 +16,7 @@
       <label for="name" class=""> Imię </label>
       <input
         id="firstName"
-        class="dark-bgc2 px-1 py-1 w-1/3"
+        class="add-user-input"
         v-model="user.firstName"
         placeholder="Imię"
         type="text"
@@ -27,7 +27,7 @@
       <label for="lastName"> Nazwisko </label>
       <input
         id="lastName"
-        class="dark-bgc2 px-1 py-1 w-1/3"
+        class="add-user-input"
         v-model="user.lastName"
         placeholder="Nazwisko"
         type="text"
@@ -40,7 +40,7 @@
         <label for="courseCompletion"> Ocena przejścia kursu </label>
         <input
           id="courseCompletion"
-          class="dark-bgc2 px-1 py-1 w-1/3"
+          class="add-user-input"
           v-model="user.courseCompletion"
           placeholder="Ocena od 1 do 5"
           type="number"
@@ -55,7 +55,7 @@
         </label>
         <input
           id="courseEngagement"
-          class="dark-bgc2 px-1 py-1 w-1/3"
+          class="add-user-input"
           v-model="user.courseEngagement"
           placeholder="Ocena od 1 do 5"
           type="number"
@@ -68,7 +68,7 @@
         <label for="projectDegree"> Ocena kodu w projekcie własnym </label>
         <input
           id="projectDegree"
-          class="dark-bgc2 px-1 py-1 w-1/3"
+          class="add-user-input"
           v-model="user.projectDegree"
           placeholder="Ocena od 1 do 5"
           type="number"
@@ -81,7 +81,7 @@
         <label for="teamProjectDegree"> Ocena pracy w zespole w Scrum </label>
         <input
           id="teamProjectDegree"
-          class="dark-bgc2 px-1 py-1 w-1/3"
+          class="add-user-input"
           v-model="user.teamProjectDegree"
           placeholder="Ocena od 1 do 5"
           type="number"
@@ -94,7 +94,7 @@
       <input
         v-if="user.permission === 'HR'"
         id="company"
-        class="dark-bgc2 px-1 py-1 w-fit"
+        class="bg-[#1e1e1f] px-1 py-1 w-fit"
         v-model="user.company"
         placeholder="Firma"
         type="text"
@@ -109,7 +109,7 @@
       </label>
       <input
         id="maxReservedStudents"
-        class="dark-bgc2 px-1 py-1 w-1/3"
+        class="add-user-input"
         v-model="user.maxReservedStudents"
         placeholder="Limit Rezerwacji Kursantów"
         type="number"

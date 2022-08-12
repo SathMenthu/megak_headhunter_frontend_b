@@ -1,6 +1,6 @@
 <template>
   <ContentLayout>
-    <div class="flex mt-3 dark-bgc">
+    <div class="flex mt-3 bg-[#292a2b]">
       <div>
         <button
           @click="selectOneTab('userListTab')"
