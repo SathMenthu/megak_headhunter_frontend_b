@@ -22,7 +22,7 @@
             <input
               disabled
               id="email"
-              class="edit-data-input"
+              class="px-1 py-1"
               v-model="editedUser.email"
               placeholder="Email"
               type="email"
